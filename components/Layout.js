@@ -144,7 +144,7 @@ export default function Layout({ children }) {
                 </div>
                 <Link
                   href="/"
-                  className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF]">
+                  className="pl-2 pr-2 pb-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF]">
                   <li className="capitalize  text-[18px]">Dashboard</li>
                 </Link>
                 <Link
