@@ -140,7 +140,7 @@ export default function Layout({ children }) {
               </svg>
             </label>
 
-            <div className=" flex  flex-col      capitalize justify-between h-full pl-4">
+            <div className=" flex  flex-col      capitalize justify-between h-full pl-4 w-full">
               <div className="flex  flex-col   gap-4  ">
                 <div className=" w-[97px] h-[89px] my-[41px] bg-[#3188FF]  ">hi</div>
                 <Link
@@ -180,11 +180,15 @@ export default function Layout({ children }) {
                 </Link>
               </div>
 
+<div className="w-full">
               <Link
                 href="/"
-                className="p-2  btn  rounded-md text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-[#3188FF] hover:text-[white]  ">
+                className="p-2  btn  rounded-md text-md  bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-[#3188FF] hover:text-[white]  ">
                 <li className="capitalize text-[18px]">Logout</li>
               </Link>
+
+</div>
+
             </div>
           </ul>
         </div>
