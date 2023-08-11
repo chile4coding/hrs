@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 // {/* <div className="drawer lg:drawer-open">
 //   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 //   <div className="drawer-content flex flex-col items-center justify-center">
@@ -26,16 +27,14 @@ import Link from "next/link";
 // </div>; */}
 
 function Header() {
-  const [searchicon, setSearchIcon] = useState(false)
+  const [searchicon, setSearchIcon] = useState(false);
 
-  function handleIcon(e){
-    if(e.target.value.length > 0){
-      setSearchIcon(true)
-
-    }else{
-      setSearchIcon(false)
+  function handleIcon(e) {
+    if (e.target.value.length > 0) {
+      setSearchIcon(true);
+    } else {
+      setSearchIcon(false);
     }
-
   }
 
   return (
@@ -107,8 +106,6 @@ function Header() {
   );
 }
 
-
-
 export default function Layout({ children }) {
   return (
     <div className="  w-full  h-[100vh] ">
@@ -142,7 +139,9 @@ export default function Layout({ children }) {
 
             <div className=" flex  flex-col      capitalize justify-between h-full pl-4 w-full">
               <div className="flex  flex-col   gap-4  ">
-                <div className=" w-[97px] h-[89px] my-[41px] bg-[#3188FF]  ">hi</div>
+                <div className=" w-[97px] h-[89px] my-[41px] ">
+                  <Image src="/hrs.png"  width="97" height="89"/>
+                </div>
                 <Link
                   href="/"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF]">
@@ -180,15 +179,13 @@ export default function Layout({ children }) {
                 </Link>
               </div>
 
-<div className="w-full">
-              <Link
-                href="/"
-                className="p-2  btn  rounded-md text-md  bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-[#3188FF] hover:text-[white]  ">
-                <li className="capitalize text-[18px]">Logout</li>
-              </Link>
-
-</div>
-
+              <div className="w-full">
+                <Link
+                  href="/"
+                  className="p-2  btn  rounded-md text-md  bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-[#3188FF] hover:text-[white]  ">
+                  <li className="capitalize text-[18px]">Logout</li>
+                </Link>
+              </div>
             </div>
           </ul>
         </div>
