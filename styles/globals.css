@@ -15,5 +15,11 @@
 
 body {
   background-color: #FAFAFA;
-  color: black;
+  color: #0A1B33;
+font-family: Mukta;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+text-transform: capitalize;
 }
