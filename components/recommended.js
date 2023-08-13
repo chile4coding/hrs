@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Recommended() {
   return (
-    <div className="  w-full md:w-full lg:w-full  h-[83px]   bg-white mx-10  cursor-pointer  btn border-collapse border-0 hover:bg-white my-2 ">
+    <div className=" card w-full md:w-full lg:w-full  h-[83px]   p-4    bg-white   cursor-pointer   border-collapse border-0 hover:bg-white my-4">
       <div className=" grid grid-cols-3">
         <div className=" flex col-span-2 items-end gap-2">
           <Image src={"/fmc.png"} width={51} height={51} />
@@ -23,9 +23,13 @@ export default function Recommended() {
             </h2>
           </div>
         </div>
-        <Link href="" className=" self-end text-[#3188FF] capitalize">
-          view in map
-        </Link>
+
+          <Link
+            href=""
+            className=" self-end justify-self-end text-[#3188FF] capitalize">
+            view in map
+          </Link>
+
       </div>
     </div>
   );
