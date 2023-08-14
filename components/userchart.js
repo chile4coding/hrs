@@ -83,7 +83,7 @@ export const userData1 = [
     plugins: {
       title: {
         display: true,
-        text: "Chart.js Line Char",
+        text: "Hospital Recommender System",
       },
     },
     interaction: {
