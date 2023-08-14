@@ -1,9 +1,9 @@
 import React from "react";
 import Layout from "../components/Layout";
-import Dashboardmenus from "@/components/dashboardmenus";
-import Userchart from "@/components/userchart";
+import Dashboardmenus from "../components/dashboardmenus";
+import Userchart from "../components/userchart";
 
-import Appointment from "@/components/appointment";
+import Appointment from "../components/appointment";
 
 export default function home() {
 

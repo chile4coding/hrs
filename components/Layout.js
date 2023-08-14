@@ -1,6 +1,6 @@
 import React from "react";
 import {AiOutlineMail} from "react-icons/ai"
-import {IoMdNotificationsOutline} from "react-icons/Io"
+import {IoMdNotificationsOutline} from "react-icons/io"
 import { useState } from "react";
 import Recommended from "./recommended";
 import Link from "next/link";
