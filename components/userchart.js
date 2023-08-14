@@ -1,6 +1,7 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import {Chart as Chartjs} from  "chart.js/auto"
+import { useState } from "react";
 
 export const userData1 = [
   {
@@ -107,9 +108,27 @@ export const userData1 = [
     },
   };
 
-export default function Userchart({charData}) {
+export default function Userchart() {
+
+      const [userData, setUserData] = useState({
+        labels: userData1.map((data) => data.month),
+        datasets: [
+          {
+            label: "Appointments",
+            data: userData1.map((data) => data.appointment),
+            borderColor: "#0000ff",
+            backgroundColor: "#0000ff",
+          },
+          {
+            label: "Recomendations",
+            data: userData1.map((data) => data.Recommend),
+            borderColor: "#008000",
+            backgroundColor: "#008000",
+          },
+        ],
+      });
   return (
-    <Line  data={charData} 
+    <Line  data={userData} 
 
 options={options}
         
