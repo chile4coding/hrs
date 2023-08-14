@@ -23,7 +23,7 @@ import Link from "next/link";
 
 export default function Specialist(){
     return (
-      <div className='bg-[#fff]'>
+      <div className='bg-[#fff] mb-8'>
         <h2 className="text-[#002C69]  font-bold font-Mukta  capitalize text-lg pl-8 py-4">
          Specialists
         </h2>

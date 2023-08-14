@@ -15,29 +15,7 @@ import {AiOutlineQuestionCircle} from "react-icons/ai"
 import Specialist from "./specialists";
 import {IoSettingsOutline} from "react-icons/io5"
 import {CiLogout} from "react-icons/ci"
-// {/* <div className="drawer lg:drawer-open">
-//   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-//   <div className="drawer-content flex flex-col items-center justify-center">
-//     {/* Page content here */}
-//     <label
-//       htmlFor="my-drawer-2"
-//       className="btn btn-primary drawer-button lg:hidden">
-//       Open drawer
-//     </label>
-//   </div>
-//   <div className="drawer-side">
-//     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-//     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-//       {/* Sidebar content here */}
-//       <li>
-//         <a>Sidebar Item 1</a>
-//       </li>
-//       <li>
-//         <a>Sidebar Item 2</a>
-//       </li>
-//     </ul>
-//   </div>
-// </div>; */}
+
 
 function Header() {
   const [searchicon, setSearchIcon] = useState(false);
@@ -156,7 +134,7 @@ function Header() {
 
 function Footer(){ 
   return (
-    <div className="flex justify-between h-[100px]  bg-[#fff] items-center px-8 mr-4">
+    <div className="flex justify-between h-[80px]  bg-[#fff] items-center px-8 mr-4 ">
       <h2 className="text-[#3188FF]">
         Copyright 2023 HRS. All Rights Reserved
       </h2>
@@ -173,7 +151,7 @@ export default function Layout({ children }) {
     <div className="  w-full  max-h-[100vh]  h-full">
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col  h-[100vh]   overflow-y-scroll">
+        <div className="drawer-content flex flex-col max-h-[100vh]   h-full overflow-y-scroll">
           <div className=" sticky top-0  " style={{ zIndex: 100 }}>
             {<Header />}
           </div>
