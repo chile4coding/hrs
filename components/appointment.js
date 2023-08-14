@@ -6,7 +6,7 @@ export default function Appointment() {
   return (
     <div className="card w-full md:w-full lg:w-full     bg-white      border-collapse border-0 hover:bg-white mb-4">
       <div className="grid grid-cols-3 px-8">
-        <h2 className="text-[#002C69]  font-bold font-Mukta  capitalize text-lg my-8  col-span-2">
+        <h2 className="text-[#002C69]  font-bold font-Mukta  capitalize text-[12px] my-8  col-span-2">
           Scheduled Appointments
         </h2>
         <BsFillPlusSquareFill className="  self-center  justify-self-end text-lg fill-[blue] cursor-pointer" />
@@ -15,7 +15,7 @@ export default function Appointment() {
         <table className="table border-0   ">
           {/* head */}
           <thead>
-            <tr className="border-0 capitalize text-[#000]">
+            <tr className="border-0 capitalize text-[#000] text-[8px]">
               <th></th>
               <th>Date</th>
               <th>Time</th>
@@ -23,11 +23,11 @@ export default function Appointment() {
               <th>Purpose</th>
             </tr>
           </thead>
-          <tbody className="text-[12px]">
+          <tbody className="text-[8px]">
             {/* row 1 */}
             <tr className="border-0 hover:bg-[#838383]">
               <td>
-                <li className="marker:text-gray list-disc pl-5 space-y-3 text-slate-400 text-[20px]"></li>
+                <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[8px]"></li>
               </td>
               <td>22/08/2023</td>
               <td>1:30pm</td>
@@ -36,7 +36,7 @@ export default function Appointment() {
             </tr>
             <tr className="border-0 hover:bg-[#838383]">
               <td>
-                <li className="marker:text-gray list-disc pl-5 space-y-3 text-slate-400 text-[20px]"></li>
+                <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[8px]"></li>
               </td>
               <td>22/08/2023</td>
               <td>1:30pm</td>
@@ -45,14 +45,13 @@ export default function Appointment() {
             </tr>
             <tr className="border-0 hover:bg-[#838383]">
               <td>
-                <li className="marker:text-gray list-disc pl-5 space-y-3 text-slate-400 text-[20px]"></li>
+                <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[8px]"></li>
               </td>
               <td>22/08/2023</td>
               <td>1:30pm</td>
               <td>Dr. chile Omereji</td>
               <td>Routine</td>
             </tr>
-         
           </tbody>
         </table>
         <div className="flex justify-end p-4 items-center gap-2 ">

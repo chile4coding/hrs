@@ -3,16 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
   function Specialists() {
   return (
-    <div className=" card w-full md:w-full lg:w-full  h-[83px]   px-4    bg-white   cursor-pointer   border-collapse border-0 hover:bg-white ">
-      <div className="grid grid-cols-3 ">
-        <div className="flex items-center col-span-2">
-          <Image src={"/specialist.png"} width={80} height={80} />
-          <div className="p-4">
-            <h2 className="font[500] text-lg text-[#454545]">Chile Omereji</h2>
-            <p className="text-[#454545]">Neuro Surgion</p>
+    <div className=" card w-full md:w-full lg:w-full  h-[83px]  px-4    bg-white   cursor-pointer   border-collapse border-0 hover:bg-white ">
+      <div className="grid grid-cols-4 ">
+        <div className="flex items-center col-span-3 ">
+          <Image src={"/specialist.png"} width={80} height={50}  className=' p-0'/>
+          <div className=" ">
+            <h2 className="font[500]  text-[#454545] text-[10px]">Chile Omereji</h2>
+            <p className="text-[#454545] text-[10px]">Neuro Surgion</p>
           </div>
         </div>
-        <button className="btn border-0 bg-[green] text-[#fff] self-center">
+        <button className=" rounded-md btn-xs border-0 bg-[green] text-[#fff] self-center text-[10px]">
           Available
         </button>
       </div>

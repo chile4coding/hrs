@@ -12,13 +12,13 @@ export default function Recommended() {
             <div className="flex items-center gap-4 ">
               <p className="p-0 m-0 text-sm  font-bold text-[#0F0F0F]">FMC</p>{" "}
               <p>4.5</p>{" "}
-              <div className="flex gap-1 text-[12px] font-[300] text-[#838383]">
+              <div className="flex gap-1 text-[8  px] font-[300] text-[#838383]">
                 <span>4.5</span>
                 <span>4.5</span>
                 <span>4.5</span>
               </div>
             </div>
-            <h2 className="text-[12px] font-[300] text-[#838383]">
+            <h2 className="text-[8px] font-[300] text-[#838383]">
               General Hospital Service
             </h2>
           </div>
