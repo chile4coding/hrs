@@ -14,9 +14,9 @@ module.exports = {
       // md: { min: "768px", max: "1023px" },
       // => @media (min-width: 768px and max-width: 1023px) { ... }
 
-      lg: { min: "769px", max: "2000px" },
+      lg: { min: "769px", max: "1440px" },
       // => @media (min-width: 1024px and max-width: 1279px) { ... }
-
+      xl: { min: "1441px"},
       // => @media (min-width: 1536px) { ... }
     },
     fontFamily: {
@@ -24,6 +24,11 @@ module.exports = {
     },
 
     extend: {
+      colors: {
+        accent: {
+          100: "#3188FF",
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

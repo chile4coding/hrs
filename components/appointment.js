@@ -4,9 +4,9 @@ import {HiArrowLongRight} from "react-icons/hi2"
 
 export default function Appointment() {
   return (
-    <div className="card w-full md:w-full lg:w-full     bg-white      border-collapse border-0 hover:bg-white mb-4">
+    <div className="card w-full md:w-full xl:w-full lg:w-full  h-full    bg-white      border-collapse border-0 hover:bg-white mb-4 mr-8 sm:mr-0">
       <div className="grid grid-cols-3 px-8">
-        <h2 className="text-[#002C69]  font-bold font-Mukta  capitalize text-[12px] my-8  col-span-2">
+        <h2 className="  text-[#002C69]  font-bold font-Mukta   text-lg capitalize my-8  col-span-2">
           Scheduled Appointments
         </h2>
         <BsFillPlusSquareFill className="  self-center  justify-self-end text-lg fill-[blue] cursor-pointer" />
@@ -15,7 +15,7 @@ export default function Appointment() {
         <table className="table border-0   ">
           {/* head */}
           <thead>
-            <tr className="border-0 capitalize text-[#000] text-[8px]">
+            <tr className="border-0 capitalize text-[#000] text-[12px]">
               <th></th>
               <th>Date</th>
               <th>Time</th>
@@ -23,29 +23,30 @@ export default function Appointment() {
               <th>Purpose</th>
             </tr>
           </thead>
-          <tbody className="text-[8px]">
+          <tbody className="text-[12px]">
             {/* row 1 */}
-            <tr className="border-0 hover:bg-[#838383]">
+            <tr className="border-0 hover:bg-[#EFF6FF]">
               <td>
-                <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[8px]"></li>
+                <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[12px]"></li>
               </td>
               <td>22/08/2023</td>
               <td>1:30pm</td>
               <td>Dr. chile Omereji</td>
               <td>Routine</td>
             </tr>
-            <tr className="border-0 hover:bg-[#838383]">
+
+            <tr className="border-0 hover:bg-[#EFF6FF]">
               <td>
-                <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[8px]"></li>
+                <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[12px]"></li>
               </td>
               <td>22/08/2023</td>
               <td>1:30pm</td>
               <td>Dr. chile Omereji</td>
               <td>Routine</td>
             </tr>
-            <tr className="border-0 hover:bg-[#838383]">
+            <tr className="border-0 hover:bg-[#EFF6FF]">
               <td>
-                <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[8px]"></li>
+                <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[12px]"></li>
               </td>
               <td>22/08/2023</td>
               <td>1:30pm</td>

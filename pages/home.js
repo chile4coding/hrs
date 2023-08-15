@@ -4,21 +4,46 @@ import Dashboardmenus from "../components/dashboardmenus";
 import Userchart from "../components/userchart";
 
 import Appointment from "../components/appointment";
+import { ImAidKit } from "react-icons/im";
+import { GiStethoscope } from "react-icons/gi";
+import { RiHospitalFill } from "react-icons/ri";
 
 export default function home() {
 
   return (
     <Layout>
-      <div className="mt-20 grid lg:grid-cols-3  md:grid-cols-2  sm:grid-cols-1 gap-4">
-        <Dashboardmenus details="Visited Patients" />
-        <Dashboardmenus details="Specialists" />
-        <Dashboardmenus details="All Hospital" />
+      <div className="mt-20 grid xl:grid-cols-3  lg:grid-cols-3  md:grid-cols-2  sm:grid-cols-1 gap-4">
+        <Dashboardmenus
+          details="Visited Patients"
+          progress="70"
+          data="Data obtained for the last 7days from 8406 visitors to 10,552 visitors"
+          visitors="500 visitors  today"
+          value="10,552"
+          icon={<ImAidKit className="m-2" />}
+        />
+        <Dashboardmenus
+          details="Specialists"
+          progress="50"
+          data="Data obtained for the last 7days from 8406 visitors to 10,552 visitors"
+          visitors="500 visitors  today"
+          value="10,552"
+          icon={<GiStethoscope className="m-2 " />}
+        />
+        <Dashboardmenus
+          details="All Hospital"
+     
+          progress="30"
+          data="Data obtained for the last 7days from 8406 visitors to 10,552 visitors"
+          visitors="500 visitors  today"
+          value="10,552"
+          icon={<RiHospitalFill className="m-2 " />}
+        />
       </div>
-      <div className="grid grid-cols-5 lg:grid-cols-5  md:grid-cols-2   w-full   justify-center mx-auto ml-10 gap-4  mt-10">
-        <div className=" card bg-[#fff] col-span-3 pt-8">
-          <Userchart  />
+      <div className="grid  xl:grid-cols-5 lg:grid-cols-2  md:grid-cols-2  sm:grid-cols-1  w-full   justify-center   gap-4  mt-10   mx-5 ">
+        <div className=" card bg-[#fff] xl:col-span-3 pt-8 h-full w-full h-[400px] ">
+          <Userchart />
         </div>
-        <div className="col-span-2  w-full">
+        <div className="xl:col-span-2   w-full ">
           <Appointment />
         </div>
       </div>

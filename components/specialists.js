@@ -8,11 +8,11 @@ import Link from "next/link";
         <div className="flex items-center col-span-3 ">
           <Image src={"/specialist.png"} width={80} height={50}  className=' p-0'/>
           <div className=" ">
-            <h2 className="font[500]  text-[#454545] text-[10px]">Chile Omereji</h2>
-            <p className="text-[#454545] text-[10px]">Neuro Surgion</p>
+            <h2 className="font[500]  text-[#454545] text-[12px]">Chile Omereji</h2>
+            <p className="text-[#454545] text-[12px]">Neuro Surgion</p>
           </div>
         </div>
-        <button className=" rounded-md btn-xs border-0 bg-[green] text-[#fff] self-center text-[10px]">
+        <button className=" rounded-md btn-xs border-0 bg-[green] text-[#fff] self-center text-[12px]">
           Available
         </button>
       </div>
@@ -23,7 +23,7 @@ import Link from "next/link";
 
 export default function Specialist(){
     return (
-      <div className='bg-[#fff] mb-8'>
+      <div className='bg-[#fff] mb-8   card'>
         <h2 className="text-[#002C69]  font-bold font-Mukta  capitalize text-lg pl-8 py-4">
          Specialists
         </h2>

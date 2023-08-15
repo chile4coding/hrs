@@ -18,7 +18,7 @@ export default function Recommended() {
                 <span>4.5</span>
               </div>
             </div>
-            <h2 className="text-[8px] font-[300] text-[#838383]">
+            <h2 className="text-[12px] font-[300] text-[#838383]">
               General Hospital Service
             </h2>
           </div>

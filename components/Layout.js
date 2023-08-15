@@ -36,7 +36,7 @@ function Header() {
         <label
           tabIndex={0}
           htmlFor="my-drawer-2"
-          className=" drawer-button lg:hidden btn-ghost hover:cursor-pointer ">
+          className=" drawer-button xl:hidden  btn-ghost hover:cursor-pointer ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -149,35 +149,38 @@ function Footer(){
 export default function Layout({ children }) {
   return (
     <div className="  w-full  max-h-[100vh]  h-full">
-      <div className="drawer lg:drawer-open">
+      <div className="drawer xl:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col max-h-[100vh]   h-full overflow-y-scroll">
           <div className=" sticky top-0  " style={{ zIndex: 100 }}>
             {<Header />}
           </div>
-          <div className="grid grid-cols-4 mr-4 gap-8">
-            <div className="lg:mr-8  col-span-3 ">{children}</div>
-            <div>
-              <div className="grid grid-cols-2 my-4 ">
-                <h2 className=" text-[#002C69]  font-bold font-Mukta  capitalize text-lg">
-                  Recommendations
-                </h2>
-                <Link href=" " className=" justify-self-end ">
-                  view all
-                </Link>
+          <div className="grid gird-cols-4  xl:grid-cols-4 mr-4 gap-8">
+            <div className="lg:mr-8  xl:col-span-3 ">{children}</div>
+
+            <div className="grid lg:grid-cols-2 mx-5 gap-5 md:grid-cols-2">
+              <div>
+                <div className="grid xl:grid-cols-2 my-4  sm:flex sm:items-center sm:justify-around">
+                  <h2 className=" text-[#002C69]  font-bold font-Mukta  capitalize text-lg">
+                    Recommendations
+                  </h2>
+                  <Link href=" " className=" justify-self-end ">
+                    view all
+                  </Link>
+                </div>
+                <Recommended />
+                <Recommended />
+                <Recommended />
               </div>
-              <Recommended />
-              <Recommended />
-              <Recommended />
 
               <Specialist />
             </div>
           </div>
-          <Footer/>
+          <Footer />
         </div>
         <div className="drawer-side " sticky top-0 style={{ zIndex: 999 }}>
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p  w-60  text-base-content   bg-[#fff]  max-h-[98vh] h-full">
+          <ul className="menu p  w-60  text-base-content   bg-[#fff]  max-h-[100vh] h-full ">
             <label
               tabIndex={0}
               htmlFor="my-drawer-2"
@@ -199,7 +202,7 @@ export default function Layout({ children }) {
 
             <div className=" flex  flex-col      capitalize justify-between h-full pl-4 w-full">
               <div className="flex  flex-col   gap-4  ">
-                <div className=" w-[97px] h-[89px] my-[41px]  sm:text-xs">
+                <div className=" w-[97px] h-[89px] my-[30px]  sm:text-xs">
                   <Image src="/hrs.png" width="97" height="89" />
                 </div>
                 <Link
@@ -265,9 +268,7 @@ export default function Layout({ children }) {
                   href="/"
                   className="    ml-0  bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-[#3188FF] hover:text-[white]   rounded-md text-md   sm:w-40 w-full  flex  py-2 px-4 gap-2">
                   <CiLogout className="text-lg  " />
-                  <li className="capitalize text-[18px] sm:text-sm ">
-                    Logout
-                  </li>
+                  <li className="capitalize text-[18px] sm:text-sm ">Logout</li>
                 </Link>
               </div>
             </div>
