@@ -17,7 +17,7 @@ module.exports = {
       lg: { min: "769px", max: "1440px" },
       // => @media (min-width: 1024px and max-width: 1279px) { ... }
       xl: { min: "1441px"},
-      // => @media (min-width: 1536px) { ... }
+      // => @media (min-width: 1536px) { ... 
     },
     fontFamily: {
       Mukta: "Mukta",
