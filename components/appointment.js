@@ -5,8 +5,251 @@ import { Modal } from "../pages/appointment";
 import { LiaCalendarPlusSolid } from "react-icons/lia";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
+import { BsArrowLeft } from "react-icons/bs";
+import { BsArrowRight } from "react-icons/bs";
 
+export function AppointmentTable() {
+  const [searchicon, setSearchIcon] = useState(false);
 
+  function handleIcon(e) {
+    if (e.target.value.length > 0) {
+      setSearchIcon(true);
+    } else {
+      setSearchIcon(false);
+    }
+  }
+
+  return (
+    <div className="card bg-[white]  px-5 py-8">
+      <div className=" grid grid-cols-2 md:grid-cols-2 sm:grid-cols-1 mb-8">
+        <div className="flex items-center gap-3  flex-wrap">
+          <div className="border p-1 bg-[#EAF2FE] rounded-md">
+            <LiaCalendarPlusSolid className="text-2xl bg-[blue] text-[white] rounded-md" />
+          </div>
+          <h2 className=" font-bold text-xl text-[#1E1E1E]">
+            All Appointments
+          </h2>
+        </div>
+        <div className=" flex items-center gap-4   justify-end">
+          <div class="relative inline-flex items-center w-full     max-w-xs ">
+            <input
+              type="text"
+              placeholder="search for hospitals here"
+              className="input  input-bordered border-collapse bg-transparent w-full  placeholder:px-8"
+              onChange={handleIcon}
+            />
+
+            {!searchicon && (
+              <div class="absolute left-0 pl-3 flex items-center pointer-events-none sm:hidden">
+                {/* <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-6 h-6 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 18h4M21 21l-5-5"
+                />
+              </svg> */}
+                {/* <Image
+                src={"/icons/search.svg"}
+                width={20}
+                height={20}
+                className=" bg-transparent"
+              /> */}
+                <AiOutlineSearch className="text-2xl text-gray-400" />
+              </div>
+            )}
+          </div>
+          <div className="border px-4 py-2 flex items-center rounded-md">
+            <HiOutlineAdjustmentsVertical className=" text-2xl" />
+            <p>Filter</p>
+          </div>
+        </div>
+      </div>
+      <div className=" overflow-x-auto sm:overflow-x-auto">
+        <table className="table border-0   ">
+          {/* head */}
+          <thead>
+            <tr className="border-0 capitalize text-[#000] text-[16px]   font-semibold">
+              <th>No</th>
+              <th>ID Card</th>
+              <th>Hospital</th>
+              <th>Specialist</th>
+              <th>Purpose</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody className="text-[12px]">
+            {/* row 1 */}
+            <tr className="border-0 hover:bg-[#EFF6FF]">
+              <td>01</td>
+              <td>FC76890</td>
+              <td>General Hospital, Abj</td>
+              <td>Dr. chile Omereji</td>
+              <td>Checkup</td>
+              <td>22/08/2023</td>
+              <td>1:30pm</td>
+              <td>
+                <button
+                  type="button"
+                  className="btn text-sm btn-sm w-full  font-normal capitalize">
+                  pending
+                </button>
+              </td>
+            </tr>
+            <tr className="border-0 hover:bg-[#EFF6FF]">
+              <td>01</td>
+              <td>FC76890</td>
+              <td>General Hospital, Abj</td>
+              <td>Dr. chile Omereji</td>
+              <td>Checkup</td>
+              <td>22/08/2023</td>
+              <td>1:30pm</td>
+              <td>
+                <button
+                  type="button"
+                  className="btn text-sm btn-sm w-full  font-normal capitalize">
+                  pending
+                </button>
+              </td>
+            </tr>
+            <tr className="border-0 hover:bg-[#EFF6FF]">
+              <td>01</td>
+              <td>FC76890</td>
+              <td>General Hospital, Abj</td>
+              <td>Dr. chile Omereji</td>
+              <td>Checkup</td>
+              <td>22/08/2023</td>
+              <td>1:30pm</td>
+              <td>
+                <button
+                  type="button"
+                  className="btn text-sm btn-sm w-full  font-normal capitalize">
+                  pending
+                </button>
+              </td>
+            </tr>
+            <tr className="border-0 hover:bg-[#EFF6FF]">
+              <td>01</td>
+              <td>FC76890</td>
+              <td>General Hospital, Abj</td>
+              <td>Dr. chile Omereji</td>
+              <td>Checkup</td>
+              <td>22/08/2023</td>
+              <td>1:30pm</td>
+              <td>
+                <button
+                  type="button"
+                  className="btn text-sm btn-sm w-full  font-normal capitalize">
+                  pending
+                </button>
+              </td>
+            </tr>
+            <tr className="border-0 hover:bg-[#EFF6FF]">
+              <td>01</td>
+              <td>FC76890</td>
+              <td>General Hospital, Abj</td>
+              <td>Dr. chile Omereji</td>
+              <td>Checkup</td>
+              <td>22/08/2023</td>
+              <td>1:30pm</td>
+              <td>
+                <button
+                  type="button"
+                  className="btn text-sm btn-sm w-full  font-normal capitalize">
+                  pending
+                </button>
+              </td>
+            </tr>
+            <tr className="border-0 hover:bg-[#EFF6FF]">
+              <td>01</td>
+              <td>FC76890</td>
+              <td>General Hospital, Abj</td>
+              <td>Dr. chile Omereji</td>
+              <td>Checkup</td>
+              <td>22/08/2023</td>
+              <td>1:30pm</td>
+              <td>
+                <button
+                  type="button"
+                  className="btn text-sm btn-sm w-full  font-normal capitalize">
+                  pending
+                </button>
+              </td>
+            </tr>
+            <tr className="border-0 hover:bg-[#EFF6FF]">
+              <td>01</td>
+              <td>FC76890</td>
+              <td>General Hospital, Abj</td>
+              <td>Dr. chile Omereji</td>
+              <td>Checkup</td>
+              <td>22/08/2023</td>
+              <td>1:30pm</td>
+              <td>
+                <button
+                  type="button"
+                  className="btn text-sm btn-sm w-full  font-normal capitalize">
+                  pending
+                </button>
+              </td>
+            </tr>
+            <tr className="border-0 hover:bg-[#EFF6FF]">
+              <td>01</td>
+              <td>FC76890</td>
+              <td>General Hospital, Abj</td>
+              <td>Dr. chile Omereji</td>
+              <td>Checkup</td>
+              <td>22/08/2023</td>
+              <td>1:30pm</td>
+              <td>
+                <button
+                  type="button"
+                  className="btn text-sm btn-sm w-full  font-normal capitalize">
+                  pending
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className=" flex justify-between items-center my-4 ">
+        <button className="btn   font-normal capitalize px-8 border border-[#8F8F8F] hover:bg-[#3188FF]">
+          <BsArrowLeft /> Previous
+        </button>
+        <div>
+          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF] ">
+            1
+          </button>
+          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize hover:bg-[#3188FF]">
+            2
+          </button>
+          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF]">
+            3
+          </button>
+          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF]">
+            4
+          </button>
+          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF]">
+            5
+          </button>
+          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF]">
+            6
+          </button>
+        </div>
+
+        <button className="btn font-normal   border border-[#8F8F8F] px-8 capitalize hover:bg-[#3188FF] ">
+          next <BsArrowRight />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function Appointment() {
   return (

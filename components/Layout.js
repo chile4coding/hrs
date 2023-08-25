@@ -156,7 +156,9 @@ export default function Layout({ children }) {
             {<Header />}
           </div>
           <div className="grid gird-cols-4  xl:grid-cols-4 ">
-            <div className="  xl:col-span-3 mx-10 sm:mx-5  overflow-hidden ">{children}</div>
+            <div className="  xl:col-span-3 mx-10 sm:mx-5  overflow-hidden ">
+              {children}
+            </div>
 
             <div className="grid lg:grid-cols-2  gap-5 md:grid-cols-2 my-6 mr-10 lg:ml-10 md:ml-10  sm:mx-5">
               <div>
@@ -238,7 +240,7 @@ export default function Layout({ children }) {
                   </li>
                 </ActiveLink>
                 <ActiveLink
-                  href="/"
+                  href="/specialists"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <LiaUserNurseSolid className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm ">
