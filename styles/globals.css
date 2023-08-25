@@ -23,3 +23,17 @@ font-weight: 500;
 line-height: normal;
 text-transform: capitalize;
 }
+
+.active{
+  color: #3188FF;
+}
+
+.modal-box {
+  @apply p-0;
+  
+}
+
+
+/* .progress{
+  @apply bg-[blue]
+} */

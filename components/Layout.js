@@ -1,21 +1,21 @@
 import React from "react";
-import {AiOutlineMail} from "react-icons/ai"
-import {IoMdNotificationsOutline} from "react-icons/io"
+import { AiOutlineMail } from "react-icons/ai";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { useState } from "react";
 import Recommended from "./recommended";
 import Link from "next/link";
 import Image from "next/image";
-import {AiOutlineSearch} from "react-icons/ai"
-import {RxDashboard} from "react-icons/rx"
-import {LiaCalendarPlusSolid} from "react-icons/lia"
-import  {LuCross} from "react-icons/lu"
-import {LiaDollyFlatbedSolid} from "react-icons/lia"
-import {LiaUserNurseSolid} from "react-icons/lia"
-import {AiOutlineQuestionCircle} from "react-icons/ai"
+import { AiOutlineSearch } from "react-icons/ai";
+import { RxDashboard } from "react-icons/rx";
+import { LiaCalendarPlusSolid } from "react-icons/lia";
+import { LuCross } from "react-icons/lu";
+import { LiaDollyFlatbedSolid } from "react-icons/lia";
+import { LiaUserNurseSolid } from "react-icons/lia";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 import Specialist from "./specialists";
-import {IoSettingsOutline} from "react-icons/io5"
-import {CiLogout} from "react-icons/ci"
-
+import { IoSettingsOutline } from "react-icons/io5";
+import { CiLogout } from "react-icons/ci";
+import ActiveLink from "./Activelink";
 
 function Header() {
   const [searchicon, setSearchIcon] = useState(false);
@@ -52,7 +52,7 @@ function Header() {
           </svg>
         </label>
 
-        <div class="relative inline-flex items-center w-full max-w-sm md:max-w-lg">
+        <div class="relative inline-flex items-center w-full   md:max-w-lg">
           <input
             type="text"
             placeholder="search for hospitals here"
@@ -81,7 +81,7 @@ function Header() {
                 height={20}
                 className=" bg-transparent"
               /> */}
-              <AiOutlineSearch className="text-2xl text-gray-400"/>
+              <AiOutlineSearch className="text-2xl text-gray-400" />
             </div>
           )}
         </div>
@@ -132,9 +132,9 @@ function Header() {
   );
 }
 
-function Footer(){ 
+function Footer() {
   return (
-    <div className="flex justify-between h-[80px]  bg-[#fff] items-center px-8 mr-4 ">
+    <div className="flex justify-between h-[80px]  bg-[#fff] items-center px-8 mr-4 py-6 ">
       <h2 className="text-[#3188FF]">
         Copyright 2023 HRS. All Rights Reserved
       </h2>
@@ -149,16 +149,16 @@ function Footer(){
 export default function Layout({ children }) {
   return (
     <div className="  w-full  max-h-[100vh]  h-full">
-      <div className="drawer xl:drawer-open ">
+      <div className="drawer xl:drawer-open  lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col max-h-[100vh]   h-full overflow-y-scroll">
           <div className=" sticky top-0  " style={{ zIndex: 100 }}>
             {<Header />}
           </div>
-          <div className="grid gird-cols-4  xl:grid-cols-4 mr-4 gap-8">
-            <div className="lg:mr-8  xl:col-span-3 ">{children}</div>
+          <div className="grid gird-cols-4  xl:grid-cols-4 ">
+            <div className="  xl:col-span-3 mx-10 sm:mx-5  overflow-hidden ">{children}</div>
 
-            <div className="grid lg:grid-cols-2 mx-5 gap-5 md:grid-cols-2">
+            <div className="grid lg:grid-cols-2  gap-5 md:grid-cols-2 my-6 mr-10 lg:ml-10 md:ml-10  sm:mx-5">
               <div>
                 <div className="grid xl:grid-cols-2 my-4  sm:flex sm:items-center sm:justify-around">
                   <h2 className=" text-[#002C69]  font-bold font-Mukta  capitalize text-lg">
@@ -205,62 +205,62 @@ export default function Layout({ children }) {
                 <div className=" w-[97px] h-[89px] my-[30px]  sm:text-xs">
                   <Image src="/hrs.png" width="97" height="89" />
                 </div>
-                <Link
-                  href="/"
-                  className="pl-2 pr-2 pb-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
+                <ActiveLink
+                  href="/home"
+                  className=" pl-2 pr-2 pb-2    rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <RxDashboard className="text-lg" />
                   <li className="capitalize  text-[18px] sm:text-sm ">
                     Dashboard
                   </li>
-                </Link>
-                <Link
-                  href="/"
-                  className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2 ">
+                </ActiveLink>
+                <ActiveLink
+                  href="/appointment"
+                  className="p-2    rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2 ">
                   <LiaCalendarPlusSolid className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm ">
                     Appointments
                   </li>
-                </Link>
-                <Link
+                </ActiveLink>
+                <ActiveLink
                   href="/"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <LuCross className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm ">
                     Services
                   </li>
-                </Link>
-                <Link
+                </ActiveLink>
+                <ActiveLink
                   href="/"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <LiaDollyFlatbedSolid className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm">
                     Hospitals
                   </li>
-                </Link>
-                <Link
+                </ActiveLink>
+                <ActiveLink
                   href="/"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <LiaUserNurseSolid className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm ">
                     Specialists
                   </li>
-                </Link>
-                <Link
+                </ActiveLink>
+                <ActiveLink
                   href="/"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <IoSettingsOutline className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm">
                     Settings
                   </li>
-                </Link>
-                <Link
+                </ActiveLink>
+                <ActiveLink
                   href="/"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <AiOutlineQuestionCircle className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm">
                     Help Centers
                   </li>
-                </Link>
+                </ActiveLink>
               </div>
 
               <div className="">

@@ -39,8 +39,8 @@ export default function home() {
           icon={<RiHospitalFill className="m-2 " />}
         />
       </div>
-      <div className="grid  xl:grid-cols-5 lg:grid-cols-2  md:grid-cols-2  sm:grid-cols-1  w-full   justify-center   gap-4  mt-10   mx-5 ">
-        <div className=" card bg-[#fff] xl:col-span-3 pt-8 h-full w-full h-[400px] ">
+      <div className="grid  xl:grid-cols-5 lg:grid-cols-2  md:grid-cols-2  sm:grid-cols-1  w-full   justify-center   gap-4  mt-10   mr-5 ">
+        <div className=" card bg-[#fff] xl:col-span-3 pt-8 h-full w-full  ">
           <Userchart />
         </div>
         <div className="xl:col-span-2   w-full ">
