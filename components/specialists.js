@@ -4,8 +4,8 @@ import Link from "next/link";
 import { LiaCalendarPlusSolid } from "react-icons/lia";
 import {MdOutlineTimer} from "react-icons/md"
 
-export const ImageComponent = ({ imageUrl }) => {
-  return <img src={imageUrl} alt="Image"  className="h-full w-full  object-cover"/>;
+export const ImageComponent = ({ imageUrl, rounded }) => {
+  return <img src={imageUrl} alt="Image"  className={`h-full w-full  object-cover ${rounded}`}/>;
 };
 
 export const Rating=({rate})=>{

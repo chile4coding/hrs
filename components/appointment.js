@@ -7,6 +7,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import { BsArrowLeft } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
+import ActiveLink from "./Activelink";
 
 export function AppointmentTable() {
   const [searchicon, setSearchIcon] = useState(false);
@@ -311,7 +312,9 @@ export default function Appointment() {
           </table>
           <div className="flex justify-end p-4 items-center gap-2 ">
             <span className="flex justify-end p-4 items-center gap-2 cursor-pointer">
-              <span className="capitalize ">view all</span>
+              <ActiveLink href="/appointment" className="capitalize ">
+                view all
+              </ActiveLink>
               <HiArrowLongRight className="text-2xl " />
             </span>
           </div>
