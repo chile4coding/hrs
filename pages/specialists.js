@@ -11,7 +11,7 @@ export default function Specialists() {
         <Specialistcard />
         <Specialistcard />
       </div>
-      <div className=" grid grid-cols-3 gap-4 my-10 md:grid-cols-2 sm:grid-cols-1">
+      <div className=" grid grid-cols-3 gap-4 my-10 md:grid-cols-2 sm:grid-cols-2">
         <Specialistscompletecard rate={1} />
         <Specialistscompletecard rate={2} />
         <Specialistscompletecard rate={3} />
@@ -20,5 +20,5 @@ export default function Specialists() {
         <Specialistscompletecard rate={6} />
       </div>
     </Layout>
-  );
+  );j
 }

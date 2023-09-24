@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import Recommended from "./recommended";
 import Link from "next/link";
 import Image from "next/image";
@@ -18,14 +18,15 @@ import { MdOutlineTouchApp } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import ActiveLink from "./Activelink";
 import { ImageComponent } from "./specialists";
-import { storeUser } from "../redux/hospitalSlice"
+import { storeUser } from "../redux/hospitalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../services/request";
 import { session } from "../services/request";
+import { useRouter } from "next/router";
 
-function Header({fullname, username, avatar}) {
+function Header({ fullname, username, avatar }) {
+
   const [searchicon, setSearchIcon] = useState(false);
-
 
   function handleIcon(e) {
     if (e.target.value.length > 0) {
@@ -157,32 +158,39 @@ export function Footer() {
   );
 }
 
-export default function Layout({  children }) {
+export default function Layout({ children }) {
+  const { user } = useSelector((state) => state.hospitals.user);
+  console.log(user)
 
-      const { user } = useSelector((state) => state.hospitals.user);
-      const dispatch = useDispatch();
-      useEffect(() => {
-        const get = async () => {
-          const sessionData = await session();
-          const data = await getUser(sessionData.token);
-          dispatch(storeUser(data));
-        };
-        get();
-      }, []);
-  
+  const router = useRouter();
+
+  function handleLogout() {
+    sessionStorage.clear();
+    router.replace("/login");
+  }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const get = async () => {
+      const sessionData = await session();
+      const data = await getUser(sessionData.token);
+      dispatch(storeUser(data));
+    };
+    get();
+  }, []);
+
   return (
     <div className="  w-full  max-h-[100vh]  h-full">
       <div className="drawer xl:drawer-open  lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col max-h-[100vh]   h-full overflow-y-scroll">
           <div className=" sticky top-0  " style={{ zIndex: 100 }}>
-            {
-            user &&  <Header
+            {user && (
+              <Header
                 fullname={user?.fullName}
                 avatar={user?.avatar}
                 username={user?.displayName}
               />
-            }
+            )}
           </div>
           <div className="grid gird-cols-4  xl:grid-cols-4 ">
             <div className="  xl:col-span-3 mx-10 sm:mx-5  overflow-hidden ">
@@ -261,7 +269,7 @@ export default function Layout({  children }) {
                   </li>
                 </ActiveLink>
                 <ActiveLink
-                  href="/"
+                  href="/hospitals"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <LiaDollyFlatbedSolid className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm">
@@ -296,12 +304,12 @@ export default function Layout({  children }) {
               </div>
 
               <div className="">
-                <Link
-                  href="/login"
-                  className="    ml-0  bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-[#3188FF] hover:text-[white]   rounded-md text-md   sm:w-40 w-full  flex  py-2 px-4 gap-2">
+                <div
+                onClick={handleLogout}
+                  className=" cursor-pointer   text-center ml-0  bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-[#3188FF] hover:text-[white]   rounded-md text-md   sm:w-40 w-full  flex  py-2 px-4 gap-2">
                   <CiLogout className="text-lg  " />
                   <li className="capitalize text-[18px] sm:text-sm ">Logout</li>
-                </Link>
+                </div>
               </div>
             </div>
           </ul>

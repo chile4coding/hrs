@@ -4,8 +4,16 @@ import Link from "next/link";
 import { LiaCalendarPlusSolid } from "react-icons/lia";
 import {MdOutlineTimer} from "react-icons/md"
 
-export const ImageComponent = ({ imageUrl, rounded }) => {
-  return <img src={imageUrl} alt="Image"  className={`h-full w-full  object-cover ${rounded}`}/>;
+export const ImageComponent = ({ imageUrl, rounded, maxHeight }) => {
+
+  return (
+    <img
+      src={imageUrl}
+      alt="Image"
+      className={`  rounded-t-lg   rounded-tr-lg   h-full   w-full  object-cover ${rounded}` }
+      style={{maxHeight: maxHeight}}
+    />
+  );
 };
 
 export const Rating=({rate})=>{

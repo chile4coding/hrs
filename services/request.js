@@ -37,7 +37,7 @@ export async function addedUserLocation(token) {
       async function (position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-
+console.log(latitude, longitude);
         if (token) {
           const response = await fetch(
             "https://api-hrsm.onrender.com/v1/add_location",

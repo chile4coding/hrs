@@ -116,8 +116,6 @@ function Noappointment({ handleShowModal }) {
           You currently have not appointment and appointment history.
         </p>
         <p className="pb-4 text-[#676767] text-[16px] text-center">
-
-          {" "}
           Start by setting an appointment below
         </p>
      

@@ -56,3 +56,7 @@ color: #3188FF;
 /* .progress{
   @apply bg-[blue]
 } */
+.Map{
+  width: 100%;
+  height: 100%;
+}

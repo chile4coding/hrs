@@ -10,17 +10,19 @@ import { RiHospitalFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { storeUser } from "../redux/hospitalSlice";
 import Loginspinner from "../components/spinners/Loginspinner";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const {user} = useSelector((state)=>state.hospitals.user)
+  const router =  useRouter()
   const dispatch  = useDispatch()
   useEffect( ()=>{
    
     const get = async () => {
   const  sessionData = await session()
-  const data = await getUser(sessionData.token)
+  const data = await getUser(sessionData?.token)
   dispatch(storeUser(data))
-  addedUserLocation(sessionData.token);
+  addedUserLocation(sessionData?.token);
 }
 get()
 
@@ -33,6 +35,10 @@ get()
         <Loginspinner />
       </div>
     );
+  }
+
+  if(!user  && !user.token){
+window.location.replace("/login")
   }
   return (
     <Layout >
