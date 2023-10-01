@@ -1,18 +1,33 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
 
+
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useSelector } from "react-redux";
 
 export default function Map() {
-    const [loc, setLoc] = useState([4.8472226, 6.974604])
+    const { singleHospital } = useSelector((state) => state.hospitals);
+    const [loc, setLoc] = useState(singleHospital.location.coordinates);
+
+useEffect(()=>{
+setLoc(singleHospital.location.coordinates
+);
+},[])
+
+
 
     const customIcon = new L.Icon({
       iconUrl: "/location.svg",
       iconSize: [32, 32], // Adjust the size of the icon
       iconAnchor: [16, 32], // Adjust the anchor point if necessary
     });
+
+    if(loc){
+    
+
+  
   return (
     <MapContainer
       center={loc}
@@ -24,8 +39,9 @@ export default function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={loc} icon={customIcon}>
-        <Popup>Life Save Hospital</Popup>
+        <Popup>{singleHospital.name}</Popup>
       </Marker>
     </MapContainer>
   );
+    }
 }

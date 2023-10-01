@@ -10,6 +10,7 @@ import Loginspinner from "@/components/spinners/Loginspinner";
 import { loginRequest } from "@/services/request";
 import { session, addedUserLocation } from "@/services/request";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 // import cogoToast from "cogo-toast";
 
 export default function Login() {
@@ -21,10 +22,9 @@ export default function Login() {
   });
 
   const route = useRouter();
-  useEffect(()=>{
-    addedUserLocation()
-  }, [])
- 
+  useEffect(() => {
+    addedUserLocation();
+  }, []);
 
   const handleShowPassword = () => setShowPassword((password) => !password);
 
@@ -33,44 +33,41 @@ export default function Login() {
     setValue({ ...valu, [name]: value });
   }
 
-  const finalCheck = Boolean(
-    valu.email && valu.loading && valu.password
-  );
+  const finalCheck = Boolean(valu.email && valu.loading && valu.password);
   async function handleSubmit(e) {
     e.preventDefault();
 
+    setValue({ ...valu, loading: true });
 
-      setValue({ ...valu, loading: true });
-
-    sessionStorage.clear()
+    sessionStorage.clear();
     const response = await loginRequest({
       email: valu.email,
       password: valu.password,
     });
 
-    const  data = await response.json();
+    const data = await response.json();
     if (response.ok) {
-      session(data)
-     toast.success(data.mesage,)
+      Cookies.set("token", data?.token,  { expires: 7 });
+      session(data);
+      toast.success(data.mesage);
 
       setValue({ ...valu, loading: false });
     } else {
-
       toast.error(data.error);
       setValue({ ...valu, loading: false });
       route.replace("/login");
     }
-  const sessionData  =  await session()
-  if(!sessionData){
-    return
-  }
-  route.replace("/home")
+    const sessionData = await session();
+    if (!sessionData) {
+      return;
+    }
+    route.replace("/home");
   }
 
   return (
     <Layout>
       <main className="bg-[#fff] py-8 px-8 h-full rounded-lg normal-case">
-        <h2 className=" font-bold text-[32px] text-[#3188FF]">
+        <h2 className=" font-bold text-[32px] text-[#3188FF] lg:mt-24">
           Sign in to HRS
         </h2>
         <p className="text-[14ppx] text-[#8F8F8F] my-3 font-normal">
@@ -127,7 +124,7 @@ export default function Login() {
               </div>
             </div>
           </div>
-        
+
           <div>
             <button className="btn  normal-case w-full flex  items-center bg-[#3188FF] p-3 text-[white] hover:text-[#3188FF] hover:bg-[white] hover:border-[#3188FF] hover:border">
               {valu.loading ? "Logging in" : "Login"}

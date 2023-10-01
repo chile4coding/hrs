@@ -1,84 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { LiaCalendarPlusSolid } from "react-icons/lia";
-import {MdOutlineTimer} from "react-icons/md"
-
+import { MdOutlineTimer } from "react-icons/md";
+import { Rating } from "@mui/material";
+import { useRouter } from "next/router";
+import { getSingleHospital } from "@/redux/hospitalSlice";
+import { useDispatch } from "react-redux";
 export const ImageComponent = ({ imageUrl, rounded, maxHeight }) => {
-
   return (
     <img
       src={imageUrl}
       alt="Image"
-      className={`  rounded-t-lg   rounded-tr-lg   h-full   w-full  object-cover ${rounded}` }
-      style={{maxHeight: maxHeight}}
+      className={`  rounded-t-lg   rounded-tr-lg   h-full   w-full  object-cover ${rounded}`}
+      style={{ maxHeight: maxHeight }}
     />
   );
 };
 
-export const Rating=({rate})=>{
+export const Ratings = ({ rate }) => {
   return (
-    <div className="rating rating-sm text-center">
-      <input
-        type="radio"
-        name={`rating-${rate}`}
-        className="mask mask-star-2 bg-orange-400"
-      />
-      <input
-        type="radio"
-        name={`rating-${rate}`}
-        className="mask mask-star-2 bg-orange-400"
-        checked
-      />
-      <input
-        type="radio"
-        name={`rating-${rate}`}
-        className="mask mask-star-2 bg-orange-400"
-      />
-      <input
-        type="radio"
-        name={`rating-${rate}`}
-        className="mask mask-star-2 bg-orange-400"
-      />
- 
-      <input
-        type="radio"
-        name={`rating-${rate}`}
-        className="mask mask-star-2 bg-orange-400"
-      />
- 
-  
- 
-    </div>
+    <Rating
+      sx={{
+        fill: "green",
+      }}
+      className=" text-center"
+      defaultValue={rate}
+      precision={1}
+    />
   );
-}
-const rate = [1, 2, 3, 4]
-export function Specialistscompletecard({rate}) {
+};
+
+export function Specialistscompletecard({ specialist, name, rate, hospitalId }) {
+  const dispatch = useDispatch();
+  const { avatar, specialist: specialistDoc, _id, position } = specialist;
+  const router = useRouter();
+
+  function handleSpecialistHospital(id) {
+    dispatch(getSingleHospital(id));
+    router.push(`/hospitals/${name}`);
+  }
+
   return (
     <>
       <div className=" md:w-full  xl:w-full lg:w-full  h-full  sm:w-full bg-white   cursor-pointer   border-collapse border-0 hover:bg-white  ">
-        <div className="card-body   w-full">
+        <div className="card py-6   w-full">
           <div className=" w-16 h-16 mx-auto">
-            <ImageComponent imageUrl="https://infoguidenigeria.com/wp-content/uploads/2022/11/Marketing-Coordinator-Job-Description-780x470.jpg" />
+            <ImageComponent imageUrl={avatar} />
           </div>
           <h1 className="  border-0 p-2 text-[#1E1E1E] capitalize  font-semibold text-center">
-            Dr Chile Omereji
+            {specialistDoc}
           </h1>
           <p className="  text-[12px] capitalize text-center  font-normal">
-            Neurologist
+            {position}
           </p>
           <div className=" text-center mt-2">
-            <Rating rate={rate} />
+            <Ratings rate={rate} />
           </div>
         </div>
         <div>
-        <div className="flex  items-center justify-center py-2  border w-full gap-3">
-          <MdOutlineTimer className=" justify-self-center  text-lg" />{" "}
-          <p className="justify-self-center">9:00 AM to 16:00 PM Today</p>
+          <div className="flex  items-center justify-between px-2 py-2  border w-full gap-3 sm:text-xs ">
+            <span>{name}</span>
+            <p
+              className="justify-self-center sm:text-[8px] hover:underline"
+              onClick={handleSpecialistHospital.bind(this, hospitalId)}>
+              view hospital
+            </p>
+          </div>
         </div>
-
-        </div>
-
       </div>
     </>
   );

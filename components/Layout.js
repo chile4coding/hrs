@@ -23,6 +23,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../services/request";
 import { session } from "../services/request";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 function Header({ fullname, username, avatar }) {
 
@@ -160,11 +161,13 @@ export function Footer() {
 
 export default function Layout({ children }) {
   const { user } = useSelector((state) => state.hospitals.user);
-  console.log(user)
+
 
   const router = useRouter();
 
+
   function handleLogout() {
+   Cookies.remove('token')
     sessionStorage.clear();
     router.replace("/login");
   }
@@ -197,23 +200,28 @@ export default function Layout({ children }) {
               {children}
             </div>
 
-            <div className="grid lg:grid-cols-2  gap-5 md:grid-cols-2 my-6 mr-10 lg:ml-10 md:ml-10  sm:mx-5">
-              <div>
-                <div className="grid xl:grid-cols-2 my-4  sm:flex sm:items-center sm:justify-around">
-                  <h2 className=" text-[#002C69]  font-bold font-Mukta  capitalize text-lg">
-                    Recommendations
-                  </h2>
-                  <Link href=" " className=" justify-self-end ">
-                    view all
-                  </Link>
+            {
+              <div
+                className={`grid lg:grid-cols-2  gap-5 md:grid-cols-2 my-6 mr-10 lg:ml-10 md:ml-10  sm:mx-5 ${
+                  "/home" === router.asPath ? "" : "lg:hidden md:hidden sm:hidden"
+                }`}>
+                <div>
+                  <div className="grid xl:grid-cols-2 my-4  sm:flex sm:items-center sm:justify-around">
+                    <h2 className=" text-[#002C69]  font-bold font-Mukta  capitalize text-lg">
+                      Recommendations
+                    </h2>
+                    <Link href=" " className=" justify-self-end ">
+                      view all
+                    </Link>
+                  </div>
+                  <Recommended />
+                  <Recommended />
+                  <Recommended />
                 </div>
-                <Recommended />
-                <Recommended />
-                <Recommended />
-              </div>
 
-              <Specialist />
-            </div>
+                <Specialist />
+              </div>
+            }
           </div>
           <Footer />
         </div>
@@ -261,7 +269,7 @@ export default function Layout({ children }) {
                   </li>
                 </ActiveLink>
                 <ActiveLink
-                  href="/"
+                  href="/facilities"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <LuCross className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm ">
@@ -286,7 +294,7 @@ export default function Layout({ children }) {
                 </ActiveLink>
 
                 <ActiveLink
-                  href="/"
+                  href="/recommendation"
                   className="p-2   rounded-sm text-md w-full bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-transparent hover:text-[#3188FF] flex  items-center gap-2">
                   <MdOutlineTouchApp className="text-lg" />
                   <li className="capitalize text-[18px] sm:text-sm">
@@ -305,7 +313,7 @@ export default function Layout({ children }) {
 
               <div className="">
                 <div
-                onClick={handleLogout}
+                  onClick={handleLogout}
                   className=" cursor-pointer   text-center ml-0  bg-transparent  border-0 text-[#0F0F0FBF] hover:bg-[#3188FF] hover:text-[white]   rounded-md text-md   sm:w-40 w-full  flex  py-2 px-4 gap-2">
                   <CiLogout className="text-lg  " />
                   <li className="capitalize text-[18px] sm:text-sm ">Logout</li>

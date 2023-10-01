@@ -7,6 +7,8 @@ export async function loginRequest(userData) {
     body: JSON.stringify(userData),
   });
 
+
+
   return response;
 }
 
@@ -37,7 +39,7 @@ export async function addedUserLocation(token) {
       async function (position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-console.log(latitude, longitude);
+
         if (token) {
           const response = await fetch(
             "https://api-hrsm.onrender.com/v1/add_location",
@@ -73,4 +75,29 @@ export async function signup(data){
 
     return response
 
+}
+export async function getHospitals(token){
+    const response = await fetch(
+      "https://api-hrsm.onrender.com/v1/get_hospitals",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+
+    const data  =  await response.json();
+
+
+
+    return  data
+
+}
+export function  pagination(totalItems){
+  const data = Array.from(
+    { length: Math.ceil(totalItems.length / 3) },
+    (_, index) => totalItems.slice(index * 3, (index + 1) * 3)
+  );
+ return data
 }

@@ -12,17 +12,28 @@ import { storeUser } from "../redux/hospitalSlice";
 import Loginspinner from "../components/spinners/Loginspinner";
 import { useRouter } from "next/router";
 
+
+export function PageLoad(){
+  return (
+    <div className="w-[100vw] h-[100vh] flex flex-col justify-center items-center text-[#3188FF]">
+      <h2 className=" text-4xl   font-extrabold">HRS</h2>
+      <Loginspinner />
+    </div>
+  );
+}
+
 export default function Home() {
   const {user} = useSelector((state)=>state.hospitals.user)
   const router =  useRouter()
   const dispatch  = useDispatch()
   useEffect( ()=>{
-   
     const get = async () => {
   const  sessionData = await session()
+
   const data = await getUser(sessionData?.token)
   dispatch(storeUser(data))
   addedUserLocation(sessionData?.token);
+
 }
 get()
 
@@ -30,16 +41,11 @@ get()
 
   if(!user){
     return (
-      <div className="w-[100vw] h-[100vh] flex flex-col justify-center items-center text-[#3188FF]">
-       <h2 className=" text-4xl   font-extrabold">HRS</h2>
-        <Loginspinner />
-      </div>
+     <PageLoad/>
     );
   }
 
-  if(!user  && !user.token){
-window.location.replace("/login")
-  }
+
   return (
     <Layout >
       <div className="mt-20 grid xl:grid-cols-3  lg:grid-cols-3  md:grid-cols-2  sm:grid-cols-1 gap-4">
