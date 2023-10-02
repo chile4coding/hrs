@@ -9,7 +9,9 @@ import { BsArrowLeft } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
 import ActiveLink from "./Activelink";
 
-export function AppointmentTable() {
+export function AppointmentTable({ appointment, nextPage, prevPage }) {
+
+  
   const [searchicon, setSearchIcon] = useState(false);
 
   function handleIcon(e) {
@@ -18,6 +20,16 @@ export function AppointmentTable() {
     } else {
       setSearchIcon(false);
     }
+  }
+
+  function dataFormat(exactDate) {
+    const timeArr = exactDate.split(":");
+
+    const [hour, minute] = timeArr;
+
+    let amOrPm = hour >= 12 ? "PM" : "AM";
+
+    return `${hour}:${minute} ${amOrPm}`;
   }
 
   return (
@@ -88,139 +100,34 @@ export function AppointmentTable() {
           </thead>
           <tbody className="text-[12px]">
             {/* row 1 */}
-            <tr className="border-0 hover:bg-[#EFF6FF]">
-              <td>01</td>
-              <td>FC76890</td>
-              <td>General Hospital, Abj</td>
-              <td>Dr. chile Omereji</td>
-              <td>Checkup</td>
-              <td>22/08/2023</td>
-              <td>1:30pm</td>
-              <td>
-                <button
-                  type="button"
-                  className="btn text-sm btn-sm w-full  font-normal capitalize">
-                  pending
-                </button>
-              </td>
-            </tr>
-            <tr className="border-0 hover:bg-[#EFF6FF]">
-              <td>01</td>
-              <td>FC76890</td>
-              <td>General Hospital, Abj</td>
-              <td>Dr. chile Omereji</td>
-              <td>Checkup</td>
-              <td>22/08/2023</td>
-              <td>1:30pm</td>
-              <td>
-                <button
-                  type="button"
-                  className="btn text-sm btn-sm w-full  font-normal capitalize">
-                  pending
-                </button>
-              </td>
-            </tr>
-            <tr className="border-0 hover:bg-[#EFF6FF]">
-              <td>01</td>
-              <td>FC76890</td>
-              <td>General Hospital, Abj</td>
-              <td>Dr. chile Omereji</td>
-              <td>Checkup</td>
-              <td>22/08/2023</td>
-              <td>1:30pm</td>
-              <td>
-                <button
-                  type="button"
-                  className="btn text-sm btn-sm w-full  font-normal capitalize">
-                  pending
-                </button>
-              </td>
-            </tr>
-            <tr className="border-0 hover:bg-[#EFF6FF]">
-              <td>01</td>
-              <td>FC76890</td>
-              <td>General Hospital, Abj</td>
-              <td>Dr. chile Omereji</td>
-              <td>Checkup</td>
-              <td>22/08/2023</td>
-              <td>1:30pm</td>
-              <td>
-                <button
-                  type="button"
-                  className="btn text-sm btn-sm w-full  font-normal capitalize">
-                  pending
-                </button>
-              </td>
-            </tr>
-            <tr className="border-0 hover:bg-[#EFF6FF]">
-              <td>01</td>
-              <td>FC76890</td>
-              <td>General Hospital, Abj</td>
-              <td>Dr. chile Omereji</td>
-              <td>Checkup</td>
-              <td>22/08/2023</td>
-              <td>1:30pm</td>
-              <td>
-                <button
-                  type="button"
-                  className="btn text-sm btn-sm w-full  font-normal capitalize">
-                  pending
-                </button>
-              </td>
-            </tr>
-            <tr className="border-0 hover:bg-[#EFF6FF]">
-              <td>01</td>
-              <td>FC76890</td>
-              <td>General Hospital, Abj</td>
-              <td>Dr. chile Omereji</td>
-              <td>Checkup</td>
-              <td>22/08/2023</td>
-              <td>1:30pm</td>
-              <td>
-                <button
-                  type="button"
-                  className="btn text-sm btn-sm w-full  font-normal capitalize">
-                  pending
-                </button>
-              </td>
-            </tr>
-            <tr className="border-0 hover:bg-[#EFF6FF]">
-              <td>01</td>
-              <td>FC76890</td>
-              <td>General Hospital, Abj</td>
-              <td>Dr. chile Omereji</td>
-              <td>Checkup</td>
-              <td>22/08/2023</td>
-              <td>1:30pm</td>
-              <td>
-                <button
-                  type="button"
-                  className="btn text-sm btn-sm w-full  font-normal capitalize">
-                  pending
-                </button>
-              </td>
-            </tr>
-            <tr className="border-0 hover:bg-[#EFF6FF]">
-              <td>01</td>
-              <td>FC76890</td>
-              <td>General Hospital, Abj</td>
-              <td>Dr. chile Omereji</td>
-              <td>Checkup</td>
-              <td>22/08/2023</td>
-              <td>1:30pm</td>
-              <td>
-                <button
-                  type="button"
-                  className="btn text-sm btn-sm w-full  font-normal capitalize">
-                  pending
-                </button>
-              </td>
-            </tr>
+
+            {appointment.map((appoint, i) => {
+              const time = dataFormat(appoint.time);
+
+              return (
+                <tr className="border-0 hover:bg-[#EFF6FF]">
+                  <td>{i + 1}</td>
+                  <td>FC{appoint._id.toString().slice(-4)}</td>
+                  <td>{appoint.hospital}</td>
+                  <td>{appoint.specialist}</td>
+                  <td>{appoint.purpose}</td>
+                  <td>{appoint.date}</td>
+                  <td>{time}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn text-sm btn-sm w-full  font-normal capitalize">
+                      {appoint.status}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
       <div className=" flex justify-between items-center my-4 ">
-        <button className="btn   font-normal capitalize px-8 border border-[#8F8F8F] hover:bg-[#3188FF]">
+        <button className="btn   font-normal capitalize px-8 border border-[#8F8F8F] hover:bg-[#3188FF]" onClick={prevPage}>
           <BsArrowLeft /> Previous
         </button>
         <div>
@@ -244,7 +151,7 @@ export function AppointmentTable() {
           </button>
         </div>
 
-        <button className="btn font-normal   border border-[#8F8F8F] px-8 capitalize hover:bg-[#3188FF] ">
+        <button className="btn font-normal   border border-[#8F8F8F] px-8 capitalize hover:bg-[#3188FF] " onClick={nextPage}>
           next <BsArrowRight />
         </button>
       </div>

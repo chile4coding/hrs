@@ -24,9 +24,10 @@ import { getUser } from "../services/request";
 import { session } from "../services/request";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import { getRecommmendations } from "../services/request";
+import { getRecommendation } from "../redux/hospitalSlice";
 
 function Header({ fullname, username, avatar }) {
-
   const [searchicon, setSearchIcon] = useState(false);
 
   function handleIcon(e) {
@@ -160,14 +161,11 @@ export function Footer() {
 }
 
 export default function Layout({ children }) {
-  const { user } = useSelector((state) => state.hospitals.user);
-
-
+  const { user:users, recommendation } = useSelector((state) => state.hospitals);
+const {user } =  users
   const router = useRouter();
-
-
   function handleLogout() {
-   Cookies.remove('token')
+    Cookies.remove("token");
     sessionStorage.clear();
     router.replace("/login");
   }
@@ -176,7 +174,10 @@ export default function Layout({ children }) {
     const get = async () => {
       const sessionData = await session();
       const data = await getUser(sessionData.token);
+      const recommendation = await getRecommmendations(sessionData.token);
+      
       dispatch(storeUser(data));
+      dispatch(getRecommendation(recommendation.locationRecommendation));
     };
     get();
   }, []);
@@ -203,20 +204,22 @@ export default function Layout({ children }) {
             {
               <div
                 className={`grid lg:grid-cols-2  gap-5 md:grid-cols-2 my-6 mr-10 lg:ml-10 md:ml-10  sm:mx-5 ${
-                  "/home" === router.asPath ? "" : "lg:hidden md:hidden sm:hidden"
+                  "/home" === router.asPath
+                    ? ""
+                    : "lg:hidden md:hidden sm:hidden"
                 }`}>
                 <div>
                   <div className="grid xl:grid-cols-2 my-4  sm:flex sm:items-center sm:justify-around">
                     <h2 className=" text-[#002C69]  font-bold font-Mukta  capitalize text-lg">
                       Recommendations
                     </h2>
-                    <Link href=" " className=" justify-self-end ">
+                    <Link href="/recommendation" className=" justify-self-end ">
                       view all
                     </Link>
                   </div>
-                  <Recommended />
-                  <Recommended />
-                  <Recommended />
+                  {recommendation.map((hospital) => (
+                    <Recommended key={hospital._id} hospital={hospital} />
+                  ))}
                 </div>
 
                 <Specialist />

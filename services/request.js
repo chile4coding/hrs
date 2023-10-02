@@ -7,8 +7,6 @@ export async function loginRequest(userData) {
     body: JSON.stringify(userData),
   });
 
-
-
   return response;
 }
 
@@ -49,9 +47,9 @@ export async function addedUserLocation(token) {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + token,
               },
-              body: JSON.stringify({longitude, latitude}),
+              body: JSON.stringify({ longitude, latitude }),
             }
-          );         
+          );
         }
       },
       function (error) {
@@ -63,41 +61,126 @@ export async function addedUserLocation(token) {
   }
 }
 
+export async function signup(data) {
+  const response = await fetch("https://api-hrsm.onrender.com/v1/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
-export async function signup(data){
-    const response = await fetch("https://api-hrsm.onrender.com/v1/register", {
+  return response;
+}
+export async function getHospitals(token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/get_hospitals",
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  return data;
+}
+export async function getRecommmendations(token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/recommendation",
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+
+  return data;
+}
+export async function getRecommmendationsByRating(token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/recommendation_rating",
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+
+  return data;
+}
+export async function getRecommmendationsByLocation(token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/recommendation_location",
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+
+  return data;
+}
+export async function getAppointments(token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/get_appointments",
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+
+  return data;
+}
+
+
+export async function bookAppointment(details,token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/book_appointment",
+    {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
-      body: JSON.stringify(data),
-    });
+      body: JSON.stringify(details),
+    }
+  );
 
-    return response
-
+return response
 }
-export async function getHospitals(token){
-    const response = await fetch(
-      "https://api-hrsm.onrender.com/v1/get_hospitals",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
 
-    const data  =  await response.json();
-
-
-
-    return  data
-
-}
-export function  pagination(totalItems){
+export function pagination(totalItems) {
   const data = Array.from(
     { length: Math.ceil(totalItems.length / 3) },
     (_, index) => totalItems.slice(index * 3, (index + 1) * 3)
   );
- return data
+  return data;
+}
+export function paginationTable(totalItems) {
+  const data = Array.from(
+    { length: Math.ceil(totalItems.length / 8) },
+    (_, index) => totalItems.slice(index * 8, (index + 1) * 8)
+  );
+
+  return data;
 }

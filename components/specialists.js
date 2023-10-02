@@ -7,13 +7,13 @@ import { Rating } from "@mui/material";
 import { useRouter } from "next/router";
 import { getSingleHospital } from "@/redux/hospitalSlice";
 import { useDispatch } from "react-redux";
-export const ImageComponent = ({ imageUrl, rounded, maxHeight }) => {
+export const ImageComponent = ({ imageUrl, rounded, maxHeight, maxWidth }) => {
   return (
     <img
       src={imageUrl}
       alt="Image"
       className={`  rounded-t-lg   rounded-tr-lg   h-full   w-full  object-cover ${rounded}`}
-      style={{ maxHeight: maxHeight }}
+      style={{ maxHeight: maxHeight, maxWidth: maxWidth }}
     />
   );
 };
