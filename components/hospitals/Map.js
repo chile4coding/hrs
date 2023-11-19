@@ -9,10 +9,12 @@ import { useSelector } from "react-redux";
 
 export default function Map() {
     const { singleHospital } = useSelector((state) => state.hospitals);
-    const [loc, setLoc] = useState(singleHospital.location.coordinates);
+    const [loc, setLoc] = useState([]);
 
 useEffect(()=>{
-setLoc(singleHospital.location.coordinates
+
+  const [lat, long] = singleHospital.location.coordinates;
+setLoc([long, lat]
 );
 },[])
 
@@ -24,9 +26,7 @@ setLoc(singleHospital.location.coordinates
       iconAnchor: [16, 32], // Adjust the anchor point if necessary
     });
 
-    if(loc){
-    
-
+    if(loc.length > 0) {
   
   return (
     <MapContainer

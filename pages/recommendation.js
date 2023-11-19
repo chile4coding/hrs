@@ -40,7 +40,7 @@ export default function Recommendation() {
   const [hospitalArr, setHospitalArr] = useState();
   const [showFilterValue, setShowFilterValue] = useState(false);
 
-  const { recomendationRating, recommendationLocation } = useSelector(
+  const { recomendationRating, recommendationLocation, hospitals:hosArr } = useSelector(
     (state) => state.hospitals
   );
 
@@ -52,15 +52,15 @@ export default function Recommendation() {
       const token = await session();
 
       if (token) {
-        const hospital = await getHospitals(token?.token);
-        dispatch(getHospital(hospital.hospitals));
-        const ratinRec = await getRecommmendationsByRating(token?.token);
-        const locRec = await getRecommmendationsByLocation(token?.token);
+        // const hospital = await getHospitals(token?.token);
+        // dispatch(getHospital(hospital.hospitals));
+        // const ratinRec = await getRecommmendationsByRating(token?.token);
+        // const locRec = await getRecommmendationsByLocation(token?.token);
 
-        dispatch(getRecommendationByRating(ratinRec.ratingRecommendation));
-        dispatch(getRecommendationByLoc(locRec.locationRecommendation));
+        // dispatch(getRecommendationByRating(ratinRec.ratingRecommendation));
+        // dispatch(getRecommendationByLoc(locRec.locationRecommendation));
 
-        setHospitalArr(hospital.hospitals);
+        setHospitalArr(hosArr);
       }
     }
 
@@ -93,7 +93,7 @@ setHospitalArr(recomendationRating);
           <div className="max-w-[140px]  relative">
             <div
               onClick={handleFilterValue}
-              className=" text-center justify-center border hover:bg-[#3188FF] hover:text-white  cursor-pointer px-4 py-2 flex items-center rounded-md  max-w-[140px]">
+              className=" text-center justify-center  border border-black border-1 hover:bg-[#3188FF] hover:text-white  cursor-pointer px-4 py-2 flex items-center rounded-md  max-w-[140px]">
               <HiOutlineAdjustmentsHorizontal className=" text-sm" />
               <p>Filter</p>
             </div>
@@ -113,7 +113,7 @@ setHospitalArr(recomendationRating);
                   <Card hospital={hos} key={hos._id} />
                 ))}
               </div>
-              <div className=" flex justify-between items-start mb-4 ">
+              {/* <div className=" flex justify-between items-start mb-4 ">
                 <button className="btn  sm:btn-xs  font-normal capitalize px-8 border border-[#8F8F8F] hover:bg-[#3188FF]">
                   <BsArrowLeft /> Previous
                 </button>
@@ -123,7 +123,7 @@ setHospitalArr(recomendationRating);
                   className="sm:btn-xs  btn font-normal   border border-[#8F8F8F] px-8 capitalize hover:bg-[#3188FF] ">
                   next <BsArrowRight />
                 </button>
-              </div>
+              </div> */}
             </main>
           ) : (
             <div className=" h-[80vh] flex  justify-center items-center">

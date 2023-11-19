@@ -1,19 +1,28 @@
 import React from 'react'
 import { ImageComponent } from '../specialists';
 import { useRouter } from "next/router";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getSingleHospital } from '@/redux/hospitalSlice';
 
 
 
 export default function Card({facility, hospitalId}) {
+  const {  hospitals } = useSelector((state) => state.hospitals);
+
  
     const dispatch = useDispatch();
   const  { name, avatar,hospitalName} = facility
       const router = useRouter();
 
       function handleHospitalDetails(id) {
-          dispatch(getSingleHospital(id));
+
+
+        const  hospitalMainId  =  hospitals.find(hos=>hos.facilities.map(fac=>fac._id === id))
+        const {_id: hosId} =  hospitalMainId 
+
+    
+        
+        dispatch(getSingleHospital(hosId));
         router.push("/hospitals/details");
       }
 

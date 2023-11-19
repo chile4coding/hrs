@@ -100,7 +100,6 @@ export async function getRecommmendations(token) {
 
   const data = await response.json();
 
-
   return data;
 }
 export async function getRecommmendationsByRating(token) {
@@ -116,7 +115,6 @@ export async function getRecommmendationsByRating(token) {
 
   const data = await response.json();
 
-
   return data;
 }
 export async function getRecommmendationsByLocation(token) {
@@ -125,13 +123,12 @@ export async function getRecommmendationsByLocation(token) {
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
 
   const data = await response.json();
-
 
   return data;
 }
@@ -148,12 +145,117 @@ export async function getAppointments(token) {
 
   const data = await response.json();
 
+  return data;
+}
+export async function autoUpdateAppointment(token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/appointment_auto_update",
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+
+  const data = await response.json();
 
   return data;
 }
 
+export async function getUserApointmentDashboard(token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/get_userAppointment_dashboard",
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
 
-export async function bookAppointment(details,token) {
+  const data = await response.json();
+
+  return data;
+}
+export async function uploadToCloudinary(file) {
+  try {
+    const upload = await fetch(
+      "https://api.cloudinary.com/v1_1/dynkejvim/image/upload",
+      {
+        body: file,
+        method: "POST",
+      }
+    );
+    const response = await upload.json();
+    return response;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+export async function uploadProfilePics(token, file) {
+
+  try {
+    const upload = await fetch("https://api-hrsm.onrender.com/v1/upload", {
+      body: JSON.stringify({ image: file }),
+
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return upload;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+export async function updateUserDetails(token, file) {
+
+  try {
+    const upload = await fetch("https://api-hrsm.onrender.com/v1/update_user", {
+      body: JSON.stringify(file),
+
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return upload;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+export async function updateUserCOmplete(token, file) {
+
+  try {
+    const upload = await fetch(
+      "https://api-hrsm.onrender.com/v1/update_user_complete",
+      {
+        body: JSON.stringify(file),
+
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return upload;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+export async function bookAppointment(details, token) {
   const response = await fetch(
     "https://api-hrsm.onrender.com/v1/book_appointment",
     {
@@ -166,7 +268,37 @@ export async function bookAppointment(details,token) {
     }
   );
 
-return response
+  return response;
+}
+export async function updateAppointment(details, token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/update_appointment_status",
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(details),
+    }
+  );
+
+  return response;
+}
+export async function rateHospital(details, token) {
+  const response = await fetch(
+    "https://api-hrsm.onrender.com/v1/rate_hospital",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(details),
+    }
+  );
+
+  return response;
 }
 
 export function pagination(totalItems) {

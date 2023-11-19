@@ -16,8 +16,8 @@
 }
 
 body {
-  background-color: #cbccce;
-  background-color: #FAFAFA;
+  /* background-color: #dde0e6; */
+  background-color: #dddbdb;
   color: #0A1B33;
 font-family: 'Mukta', sans-serif;
 font-size: 12px;
@@ -25,6 +25,8 @@ font-style: normal;
 font-weight: 500;
 line-height: normal;
 text-transform: capitalize;
+
+
 }
 
 .active{
@@ -60,4 +62,24 @@ color: #3188FF;
 .Map{
   width: 100%;
   height: 100%;
+}
+/* Width and height of the scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 10px;
+}
+
+/* Track (the area on which the scrollbar is rendered) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

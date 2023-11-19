@@ -10,10 +10,11 @@ import { PageLoad } from "../home";
 import Loginspinner from "@/components/spinners/Loginspinner";
 
 export default function Hospitals() {
-  const [hospitalArr , setHospitalArr] =useState()
-  const [page, setPage] = useState(0)
-  // const { hospitals } = useSelector((state) => state.hospitals.hospitals);
+  const { searchObjVal, hospitals:hosArr } = useSelector((state) => state.hospitals);
+  const [hospitalArr, setHospitalArr] = useState();
 
+  console.log(searchObjVal)
+  const [page, setPage] = useState(0)
   function nextPage(){
     if(page < hospitalArr.length - 1){
       setPage(prevpage=> prevpage + 1)
@@ -33,16 +34,25 @@ export default function Hospitals() {
     async function hospitals() {
       const token = await session();
       if (token) {
-        const hospital = await getHospitals(token?.token);
-        dispatch(getHospital(hospital.hospitals));
-        
-        const page  = pagination(hospital.hospitals);
-        setHospitalArr(page)
+     
+
+        if (searchObjVal.length > 0) {
+          const page = pagination(searchObjVal);
+          setHospitalArr(page);
+        } else {
+
+  //  const hospital = await getHospitals(token?.token);
+
+   
+
+   const page = pagination(hosArr);
+          setHospitalArr(page);
+        }
       }
     }
 
     hospitals();
-  }, []);
+  }, [searchObjVal]);
 
   return (
     <Layout>
@@ -55,7 +65,7 @@ export default function Hospitals() {
               <Card hospital={hos} key={hos._id}/>
             ))}
           </div>
-          <div className=" flex justify-between items-center mb-4 ">
+          <div className=" flex justify-between items-center mb-4   ">
             <button
               className="btn  sm:btn-xs  font-normal capitalize px-8 border border-[#8F8F8F] hover:bg-[#3188FF]"
               onClick={prevPage}>

@@ -1,9 +1,14 @@
 import React from 'react'
+import Loginspinner from "@/components/spinners/Loginspinner";
 
 
 
 
-export default function Dashboardmenus({details, icon, progress, data, visitors, value}) {
+
+export default function Dashboardmenus({details, icon, progress, data, visitors, value, }) {
+
+  console.log(progress, data, visitors, value);
+  
   return (
     <>
       <div className=" hover:bg-[#3188FF] hover:text-white card md:w-full  xl:w-full lg:w-full  h-full  sm:w-full bg-white   cursor-pointer  btn border-collapse border-0  ">
@@ -28,7 +33,7 @@ export default function Dashboardmenus({details, icon, progress, data, visitors,
 
           <progress
             className="progress  progress-primary w-full h-[8px] mt-6"
-            value={30}
+            value={progress}
             max="100"></progress>
           <p className=" text-left text-[12px] capitalize">{visitors}</p>
         </div>

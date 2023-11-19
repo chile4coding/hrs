@@ -8,11 +8,20 @@ import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import { BsArrowLeft } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
 import ActiveLink from "./Activelink";
+import { session, updateAppointment } from "@/services/request";
+import toast from "react-hot-toast";
 
-export function AppointmentTable({ appointment, nextPage, prevPage }) {
-
-  
+export function AppointmentTable({
+  appointment,
+  nextPage,
+  prevPage,
+  tables,
+  handlePageNumber,
+  page,
+  searchTable,
+}) {
   const [searchicon, setSearchIcon] = useState(false);
+  const [selectAppoint, setSelectAppoint] = useState("");
 
   function handleIcon(e) {
     if (e.target.value.length > 0) {
@@ -20,16 +29,33 @@ export function AppointmentTable({ appointment, nextPage, prevPage }) {
     } else {
       setSearchIcon(false);
     }
+
+    searchTable(e.target.value)
   }
 
   function dataFormat(exactDate) {
-    const timeArr = exactDate.split(":");
+    const timeArr = exactDate?.split(":");
 
     const [hour, minute] = timeArr;
 
     let amOrPm = hour >= 12 ? "PM" : "AM";
 
     return `${hour}:${minute} ${amOrPm}`;
+  }
+
+  async function handleAppointmentUpdate(e) {
+    const value = e.target.value;
+    const token = await session();
+    if (value.length > 10) {
+      const response = await updateAppointment(
+        { status: "concluded", appointmentId: value },
+        token?.token
+      );
+      const data = await response.json();
+      if (response.ok) {
+        toast.success(data.message);
+      }
+    }
   }
 
   return (
@@ -43,7 +69,7 @@ export function AppointmentTable({ appointment, nextPage, prevPage }) {
             All Appointments
           </h2>
         </div>
-        <div className=" flex items-center gap-4   justify-end">
+        {/* <div className=" flex items-center gap-4   justify-end">
           <div class="relative inline-flex items-center w-full     max-w-xs ">
             <input
               type="text"
@@ -54,25 +80,6 @@ export function AppointmentTable({ appointment, nextPage, prevPage }) {
 
             {!searchicon && (
               <div class="absolute left-0 pl-3 flex items-center pointer-events-none sm:hidden">
-                {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-6 h-6 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M10 18h4M21 21l-5-5"
-                />
-              </svg> */}
-                {/* <Image
-                src={"/icons/search.svg"}
-                width={20}
-                height={20}
-                className=" bg-transparent"
-              /> */}
                 <AiOutlineSearch className="text-2xl text-gray-400" />
               </div>
             )}
@@ -81,7 +88,7 @@ export function AppointmentTable({ appointment, nextPage, prevPage }) {
             <HiOutlineAdjustmentsVertical className=" text-2xl" />
             <p>Filter</p>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className=" overflow-x-auto sm:overflow-x-auto">
         <table className="table border-0   ">
@@ -105,7 +112,7 @@ export function AppointmentTable({ appointment, nextPage, prevPage }) {
               const time = dataFormat(appoint.time);
 
               return (
-                <tr className="border-0 hover:bg-[#EFF6FF]">
+                <tr className="border-0 hover:bg-[#EFF6FF]" key={appoint._id}>
                   <td>{i + 1}</td>
                   <td>FC{appoint._id.toString().slice(-4)}</td>
                   <td>{appoint.hospital}</td>
@@ -114,11 +121,30 @@ export function AppointmentTable({ appointment, nextPage, prevPage }) {
                   <td>{appoint.date}</td>
                   <td>{time}</td>
                   <td>
-                    <button
-                      type="button"
-                      className="btn text-sm btn-sm w-full  font-normal capitalize">
-                      {appoint.status}
-                    </button>
+                    {appoint.status === "upcoming" ? (
+                      <select
+                        onChange={handleAppointmentUpdate}
+                        className=" cursor-pointer py-2 outline-none border-0">
+                        <option>{appoint.status}</option>
+                        <option
+                          className=" hover:cursor-pointer"
+                          value={appoint._id}>
+                          concluded
+                        </option>
+                      </select>
+                    ) : (
+                      <button
+                        type="button"
+                        className={`btn text-sm btn-sm w-full  font-normal capitalize ${
+                          appoint.status === "concluded"
+                            ? "bg-[green] text-[white]"
+                            : appoint.status === "missed"
+                            ? "bg-[red] text-[white]"
+                            : " bg-[blue] text-white"
+                        }`}>
+                        {appoint.status}
+                      </button>
+                    )}
                   </td>
                 </tr>
               );
@@ -126,32 +152,29 @@ export function AppointmentTable({ appointment, nextPage, prevPage }) {
           </tbody>
         </table>
       </div>
-      <div className=" flex justify-between items-center my-4 ">
-        <button className="btn   font-normal capitalize px-8 border border-[#8F8F8F] hover:bg-[#3188FF]" onClick={prevPage}>
+      <div className=" flex justify-between items-center my-4  sm:grid grid-cols-3 ">
+        <button
+          className="btn  sm:order-2 font-normal  capitalize px-8 border border-[#8F8F8F] hover:bg-[#3188FF]  sm:w-full "
+          onClick={prevPage}>
           <BsArrowLeft /> Previous
         </button>
-        <div>
-          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF] ">
-            1
-          </button>
-          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize hover:bg-[#3188FF]">
-            2
-          </button>
-          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF]">
-            3
-          </button>
-          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF]">
-            4
-          </button>
-          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF]">
-            5
-          </button>
-          <button className="btn font-normal mx-2  border border-[#8F8F8F] capitalize  hover:bg-[#3188FF]">
-            6
-          </button>
+        <div className=" col-span-full sm:order-1">
+          {tables.map((num, i) => (
+            <button
+              key={i}
+              className={`btn font-normal mx-2  border      border-[#8F8F8F] capitalize  hover:bg-[#3188FF] ${
+                page === i ? "bg-[#3188FF]" : ""
+              }`}
+              onClick={handlePageNumber.bind(this, i)}>
+              {i + 1}
+            </button>
+          ))}
         </div>
 
-        <button className="btn font-normal   border border-[#8F8F8F] px-8 capitalize hover:bg-[#3188FF] " onClick={nextPage}>
+        <button
+          className="btn font-normal order-3
+               border border-[#8F8F8F] px-8 capitalize hover:bg-[#3188FF] "
+          onClick={nextPage}>
           next <BsArrowRight />
         </button>
       </div>
@@ -159,7 +182,18 @@ export function AppointmentTable({ appointment, nextPage, prevPage }) {
   );
 }
 
-export default function Appointment() {
+export default function Appointment({recent}) {
+  const {hospital, date, purpose, time, specialist} = recent
+
+   function dataFormat(exactDate) {
+     const timeArr = exactDate?.split(":");
+
+     const [hour, minute] = timeArr;
+
+     let amOrPm = hour >= 12 ? "PM" : "AM";
+
+     return `${hour}:${minute} ${amOrPm}`;
+   }
   return (
     <>
       <Modal />
@@ -187,34 +221,28 @@ export default function Appointment() {
             </thead>
             <tbody className="text-[12px]">
               {/* row 1 */}
-              <tr className="border-0 hover:bg-[#EFF6FF]">
-                <td>
-                  <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[12px]"></li>
-                </td>
-                <td>22/08/2023</td>
-                <td>1:30pm</td>
-                <td>Dr. chile Omereji</td>
-                <td>Routine</td>
-              </tr>
 
-              <tr className="border-0 hover:bg-[#EFF6FF]">
-                <td>
-                  <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[12px]"></li>
-                </td>
-                <td>22/08/2023</td>
-                <td>1:30pm</td>
-                <td>Dr. chile Omereji</td>
-                <td>Routine</td>
-              </tr>
-              <tr className="border-0 hover:bg-[#EFF6FF]">
-                <td>
-                  <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[12px]"></li>
-                </td>
-                <td>22/08/2023</td>
-                <td>1:30pm</td>
-                <td>Dr. chile Omereji</td>
-                <td>Routine</td>
-              </tr>
+              {
+recent.map((recentAppointment, i)=>{
+const time  = dataFormat(recentAppointment.time)
+return (
+  <tr className="border-0 hover:bg-[#EFF6FF]" key={i}>
+    <td>
+      <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[12px]"></li>
+    </td>
+    <td>{recentAppointment.date}</td>
+    <td>{time}</td>
+    <td>{recentAppointment.specialist}</td> 
+    <td>{recentAppointment.purpose}</td>
+  </tr>
+);
+
+})
+
+              }
+          
+
+           
             </tbody>
           </table>
           <div className="flex justify-end p-4 items-center gap-2 ">

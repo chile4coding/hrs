@@ -84,8 +84,8 @@ export default function Home() {
 
   return (
     <Layout >
-      <main className="bg-[#fff] py-8 px-8 h-full  sm:py-4  rounded-lg normal-case ">
-        <h2 className=" font-bold text-[32px] text-[#3188FF]  lg:mt-24">
+      <main className="bg-[#fff] py-10 px-8 h-full   sm:py-4  rounded-lg normal-case   ">
+        <h2 className=" font-bold text-[32px] text-[#3188FF]  ">
           Sign up to HRS
         </h2>
         <p className="ttext-[14ppx] text-[#8F8F8F] my-3 font-normal">

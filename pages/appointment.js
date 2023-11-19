@@ -123,7 +123,7 @@ export function Modal() {
                 Pick a hospital
               </option>
               {hospitals.map((hos) => (
-                <option value={hos.name}>{hos.name}</option>
+                <option value={hos.name}  key={hos._id}>{hos.name}</option>
               ))}
             </select>
             <h2 className=" self-center text-[18px]  font-medium  mb-5 text-[#0F0F0F]">
@@ -138,7 +138,7 @@ export function Modal() {
               </option>
               {specialist &&
                 specialist.map((spec) => (
-                  <option value={spec.specialist}>{spec.specialist}</option>
+                  <option value={spec.specialist} key={spec._id}>{spec.specialist}</option>
                 ))}
             </select>
 
@@ -235,10 +235,9 @@ export default function Appointment() {
     const get = async () => {
       const sessionData = await session();
 
-      const appointment = await getAppointments(sessionData.token);
-      if (appointment) {
-        dispatch(getappointments(appointment.userAppointment));
-        const pages = paginationTable(appointment.userAppointment);
+      if (appointments.length>0) {
+       
+        const pages = paginationTable(appointments);
       setTables(pages)
       }
     };
@@ -247,6 +246,22 @@ export default function Appointment() {
   const handleShowModal = () => {
     window.my_modal_2.showModal();
   };
+
+  function searchTable(value){
+ 
+   
+    const search = appointments.find(
+      (item) =>
+        item.purpose.toLowerCase().includes(value) ||
+        item.hospital.toLowerCase().includes(value) ||
+        item.specialist.toLowerCase().includes(value) ||
+        item.time.toLowerCase().includes(value) ||
+        item.date.toLowerCase().includes(value) ||
+        item.status.toLowerCase().includes(value)
+    );
+ const pages = paginationTable(search);
+ setTables(pages);
+  }
 
     function nextPage() {
       if (page < tables.length - 1) {
@@ -260,7 +275,11 @@ export default function Appointment() {
       }
     }
 
+function handlePageNumber(num){
 
+  setPage(num)
+  
+}
   
 
 
@@ -290,7 +309,15 @@ export default function Appointment() {
 
         <div className=" ">
           {tables.length > 0 ? (
-            <AppointmentTable appointment={tables[page]} nextPage={nextPage} prevPage={prevPage} />
+            <AppointmentTable
+              appointment={tables[page]}
+              nextPage={nextPage}
+              prevPage={prevPage}
+              tables={tables}
+              handlePageNumber={handlePageNumber}
+              page={page}
+              searchTable={searchTable}
+            />
           ) : (
             <Noappointment handleShowModal={handleShowModal} />
           )}
