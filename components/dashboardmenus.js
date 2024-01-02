@@ -7,7 +7,7 @@ import Loginspinner from "@/components/spinners/Loginspinner";
 
 export default function Dashboardmenus({details, icon, progress, data, visitors, value, }) {
 
-  console.log(progress, data, visitors, value);
+
   
   return (
     <>

@@ -83,13 +83,13 @@ dispatch(getRecommendationByRating(ratinRec.ratingRecommendation));
 dispatch(getRecommendationByLoc(locRec.locationRecommendation));
 
 dispatch(setFacilities(facility));
-dispatch(getHospital(hospital.hospitals));
+dispatch(getHospital(hospital?.hospitals));
       dispatch(getappointments(appointment?.userAppointment));
       await autoUpdateAppointment(sessionData?.token);
       const spec = hospitals
         .map((hos) => hos?.specialists)
         .flatMap((spec) => spec);
-      setSpecialist(spec.length);
+      setSpecialist(spec?.length);
     };
     get();
   }, []);
@@ -126,9 +126,9 @@ dispatch(getHospital(hospital.hospitals));
           progress="30"
           data="Data obtained for the last 7days "
           visitors=""
-          value={hospitals.length}
+          value={hospitals?.length}
           icon={<RiHospitalFill className="m-2 " />}
-          hospitals={hospitals.length}
+          hospitals={hospitals?.length}
         />
       </div>
       <div className="grid  xl:grid-cols-5 lg:grid-cols-2  md:grid-cols-2  sm:grid-cols-1  w-full   justify-center   gap-4  mt-10   mr-5 ">
@@ -141,20 +141,20 @@ dispatch(getHospital(hospital.hospitals));
           </div>
         )}
 
-        {chart.length > 0 && (
+        {chart?.length > 0 && (
           <div
             className={` card bg-[#fff] xl:col-span-3 pt-8 h-full w-full ${
-              chart.length > 0
+              chart?.length > 0
                 ? ""
                 : " flex justify-center items-center text-[blue]"
             } `}>
-            {chart.length > 0 ? <Userchart chart={chart} /> : <Loginspinner />}
+            {chart?.length > 0 ? <Userchart chart={chart} /> : <Loginspinner />}
           </div>
         )}
 
         <div className="xl:col-span-2   w-full ">
-          {appointments.length > 0 ? (
-            <Appointment recent={appointments.slice(0, 3)} />
+          {appointments?.length > 0 ? (
+            <Appointment recent={appointments?.slice(0, 3)} />
           ) : (
             <div className="card bg-[#fff]  h-[250px]   w-full  flex  justify-center items-center ">
               <h2 className="text-sm">No Appointment Booked</h2>
