@@ -70,7 +70,7 @@ export default function Home() {
        dispatch(getappointments(appointment.userAppointment));
         const recommendation = await getRecommmendations(sessionData.token);
         dispatch(getRecommendation(recommendation.locationRecommendation));
-        const rec = recommendation.locationRecommendation.slice(0, 4);
+        const rec = recommendation.locationRecommendation?.slice(0, 4);
 
        dispatch( setRecomm(rec));
   const hospital = await getHospitals(sessionData?.token);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Layout from "../components/homelayout/Layout";
@@ -14,10 +14,24 @@ import { signup } from "@/services/request";
 import Loginspinner from "@/components/spinners/Loginspinner";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import {
+  getHospital,
+  getRecommendation,
+  getRecommendationByRating,
+  getRecommendationByLoc,
+  getappointments,
+  searchHospital,
+  searchHospialFacility,
+  setRecomm,
+  setFacilities,
+} from "@/redux/hospitalSlice";
 
 export default function Home() {
   const [showPassword, setShowPassword] = useState(false);
   const hospitals = useSelector((state) => state.hospitals);
+  const dispatch = useDispatch();
+
   const [valu, setValue] = useState({
     email: "",
     password: "",
@@ -27,12 +41,27 @@ export default function Home() {
     loading: false,
     fullnameError: false,
     checkvalue: false,
-    checkvalueMessage:false
+    checkvalueMessage: false,
   });
   const router = useRouter();
+
+  useEffect(() => {
+    dispatch(getHospital([]));
+    dispatch(getRecommendation([]));
+    dispatch(getRecommendationByRating([]));
+    dispatch(getRecommendationByLoc([]));
+    dispatch(getappointments([]));
+    dispatch(setRecomm([]));
+    dispatch(setFacilities([]));
+  }, []);
+
   const handleShowPassword = () => setShowPassword((password) => !password);
   const handleCheck = () =>
-    setValue({ ...valu, checkvalue: !valu.checkvalue, checkvalueMessage:false });
+    setValue({
+      ...valu,
+      checkvalue: !valu.checkvalue,
+      checkvalueMessage: false,
+    });
 
   function handleValues(e) {
     const { name, value } = e.target;
@@ -56,12 +85,12 @@ export default function Home() {
       setValue({ ...valu, fullnameError: true, fullname: "" });
       return;
     }
-    if(!valu.checkvalue){
-       setValue({
-         ...valu,
-         checkvalueMessage: true,
-       });
-      return
+    if (!valu.checkvalue) {
+      setValue({
+        ...valu,
+        checkvalueMessage: true,
+      });
+      return;
     }
 
     setValue({ ...valu, loading: true });
@@ -83,7 +112,7 @@ export default function Home() {
   }
 
   return (
-    <Layout >
+    <Layout>
       <main className="bg-[#fff] py-10 px-8 h-full   sm:py-4  rounded-lg normal-case   ">
         <h2 className=" font-bold text-[32px] text-[#3188FF]  ">
           Sign up to HRS

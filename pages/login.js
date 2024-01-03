@@ -11,6 +11,18 @@ import { loginRequest } from "@/services/request";
 import { session, addedUserLocation } from "@/services/request";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import {
+  getHospital,
+  getRecommendation,
+  getRecommendationByRating,
+  getRecommendationByLoc,
+  getappointments,
+  searchHospital,
+  searchHospialFacility,
+  setRecomm,
+  setFacilities,
+} from "@/redux/hospitalSlice";
 // import cogoToast from "cogo-toast";
 
 export default function Login() {
@@ -21,9 +33,19 @@ export default function Login() {
     loading: false,
   });
 
+  const dispatch = useDispatch()
+
   const route = useRouter();
   useEffect(() => {
     addedUserLocation();
+
+    dispatch(getHospital([]));
+    dispatch(getRecommendation([]));
+    dispatch(getRecommendationByRating([]));
+    dispatch(getRecommendationByLoc([]));
+    dispatch(getappointments([]));
+    dispatch(setRecomm([]));
+    dispatch(setFacilities([]));
   }, []);
 
   const handleShowPassword = () => setShowPassword((password) => !password);
