@@ -14,7 +14,6 @@ import { signup } from "@/services/request";
 import Loginspinner from "@/components/spinners/Loginspinner";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import {
   getHospital,
   getRecommendation,
