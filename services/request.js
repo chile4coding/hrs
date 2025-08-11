@@ -1,5 +1,8 @@
+// const baseUrl = "https://api-hrsm.onrender.com/v1";
+const baseUrl = "http://localhost:5467/v1/";
+
 export async function loginRequest(userData) {
-  const response = await fetch("https://api-hrsm.onrender.com/v1/login", {
+  const response = await fetch(`${baseUrl}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +22,7 @@ export async function session(data) {
 }
 
 export async function getUser(token) {
-  const response = await fetch("https://api-hrsm.onrender.com/v1/get_user", {
+  const response = await fetch(`${baseUrl}/get_user`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
@@ -39,17 +42,14 @@ export async function addedUserLocation(token) {
         const longitude = position.coords.longitude;
 
         if (token) {
-          const response = await fetch(
-            "https://api-hrsm.onrender.com/v1/add_location",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-              },
-              body: JSON.stringify({ longitude, latitude }),
-            }
-          );
+          const response = await fetch(`${baseUrl}/add_location`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify({ longitude, latitude }),
+          });
         }
       },
       function (error) {
@@ -62,7 +62,7 @@ export async function addedUserLocation(token) {
 }
 
 export async function signup(data) {
-  const response = await fetch("https://api-hrsm.onrender.com/v1/register", {
+  const response = await fetch(`${baseUrl}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -73,90 +73,72 @@ export async function signup(data) {
   return response;
 }
 export async function getHospitals(token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/get_hospitals",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/get_hospitals`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  });
 
   const data = await response.json();
 
   return data;
 }
 export async function getRecommmendations(token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/recommendation",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/recommendation`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  });
 
   const data = await response.json();
 
   return data;
 }
 export async function getRecommmendationsByRating(token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/recommendation_rating",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/recommendation_rating`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  });
 
   const data = await response.json();
 
   return data;
 }
 export async function getRecommmendationsByLocation(token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/recommendation_location",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/recommendation_location`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   const data = await response.json();
 
   return data;
 }
 export async function getAppointments(token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/get_appointments",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/get_appointments`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  });
 
   const data = await response.json();
 
   return data;
 }
 export async function autoUpdateAppointment(token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/appointment_auto_update",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/appointment_auto_update`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  });
 
   const data = await response.json();
 
@@ -164,15 +146,12 @@ export async function autoUpdateAppointment(token) {
 }
 
 export async function getUserApointmentDashboard(token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/get_userAppointment_dashboard",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/get_userAppointment_dashboard`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  });
 
   const data = await response.json();
 
@@ -195,9 +174,8 @@ export async function uploadToCloudinary(file) {
   }
 }
 export async function uploadProfilePics(token, file) {
-
   try {
-    const upload = await fetch("https://api-hrsm.onrender.com/v1/upload", {
+    const upload = await fetch(`${baseUrl}/upload`, {
       body: JSON.stringify({ image: file }),
 
       method: "POST",
@@ -214,9 +192,8 @@ export async function uploadProfilePics(token, file) {
   }
 }
 export async function updateUserDetails(token, file) {
-
   try {
-    const upload = await fetch("https://api-hrsm.onrender.com/v1/update_user", {
+    const upload = await fetch(`${baseUrl}/update_user`, {
       body: JSON.stringify(file),
 
       method: "POST",
@@ -233,20 +210,16 @@ export async function updateUserDetails(token, file) {
   }
 }
 export async function updateUserCOmplete(token, file) {
-
   try {
-    const upload = await fetch(
-      "https://api-hrsm.onrender.com/v1/update_user_complete",
-      {
-        body: JSON.stringify(file),
+    const upload = await fetch(`${baseUrl}/update_user_complete`, {
+      body: JSON.stringify(file),
 
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     return upload;
   } catch (error) {
@@ -256,47 +229,38 @@ export async function updateUserCOmplete(token, file) {
 }
 
 export async function bookAppointment(details, token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/book_appointment",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(details),
-    }
-  );
+  const response = await fetch(`${baseUrl}/book_appointment`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(details),
+  });
 
   return response;
 }
 export async function updateAppointment(details, token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/update_appointment_status",
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(details),
-    }
-  );
+  const response = await fetch(`${baseUrl}/update_appointment_status`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(details),
+  });
 
   return response;
 }
 export async function rateHospital(details, token) {
-  const response = await fetch(
-    "https://api-hrsm.onrender.com/v1/rate_hospital",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(details),
-    }
-  );
+  const response = await fetch(`${baseUrl}/rate_hospital`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(details),
+  });
 
   return response;
 }

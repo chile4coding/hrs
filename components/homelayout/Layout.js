@@ -1,14 +1,12 @@
-import React from 'react'
-import {CiMedicalCross} from "react-icons/ci"
+import React from "react";
+import { CiMedicalCross } from "react-icons/ci";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import {LiaUserNurseSolid} from "react-icons/lia"
+import { LiaUserNurseSolid } from "react-icons/lia";
 
-import Image from 'next/image';
-export default function Layout({children}) {
-
-  
+import Image from "next/image";
+export default function Layout({ children }) {
   return (
-    <section className=" xl:h-[100vh]  lg:py-10 flex flex-col justify-center items-center  w-full    ">
+    <section className=" xl:h-[100vh]  lg:py-10 flex flex-col justify-center items-center  w-full   min-h-screen   ">
       <div className="grid grid-cols-2  gap-20  px-8 sm:grid-cols-1 md:gap-10 md:grid-cols-1 ">
         <div className="max-w-[465px]  my-auto mx-auto  sm:hidden md:hidden normal-case sticky  top-0">
           <div className=" w-[97px] h-[89px] mb-[30px]  sm:text-xs mx-auto">
@@ -41,7 +39,9 @@ export default function Layout({children}) {
             </p>
           </div>
         </div>
-        <div>{children}</div>
+        <div className=" flex flex-col  justify-center items-center ">
+          {children}
+        </div>
       </div>
     </section>
   );

@@ -8,8 +8,14 @@ import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 import { BsArrowLeft } from "react-icons/bs";
 import { BsArrowRight } from "react-icons/bs";
 import ActiveLink from "./Activelink";
-import { session, updateAppointment } from "@/services/request";
+import {
+  getAppointments,
+  session,
+  updateAppointment,
+} from "@/services/request";
 import toast from "react-hot-toast";
+import { getappointments } from "@/redux/hospitalSlice";
+import { useDispatch } from "react-redux";
 
 export function AppointmentTable({
   appointment,
@@ -22,6 +28,7 @@ export function AppointmentTable({
 }) {
   const [searchicon, setSearchIcon] = useState(false);
   const [selectAppoint, setSelectAppoint] = useState("");
+  const dispatch = useDispatch();
 
   function handleIcon(e) {
     if (e.target.value.length > 0) {
@@ -30,7 +37,7 @@ export function AppointmentTable({
       setSearchIcon(false);
     }
 
-    searchTable(e.target.value)
+    searchTable(e.target.value);
   }
 
   function dataFormat(exactDate) {
@@ -54,6 +61,9 @@ export function AppointmentTable({
       const data = await response.json();
       if (response.ok) {
         toast.success(data.message);
+
+        const appointment = await getAppointments(token?.token);
+        dispatch(getappointments(appointment?.userAppointment));
       }
     }
   }
@@ -182,18 +192,18 @@ export function AppointmentTable({
   );
 }
 
-export default function Appointment({recent}) {
-  const {hospital, date, purpose, time, specialist} = recent
+export default function Appointment({ recent }) {
+  const { hospital, date, purpose, time, specialist } = recent;
 
-   function dataFormat(exactDate) {
-     const timeArr = exactDate?.split(":");
+  function dataFormat(exactDate) {
+    const timeArr = exactDate?.split(":");
 
-     const [hour, minute] = timeArr;
+    const [hour, minute] = timeArr;
 
-     let amOrPm = hour >= 12 ? "PM" : "AM";
+    let amOrPm = hour >= 12 ? "PM" : "AM";
 
-     return `${hour}:${minute} ${amOrPm}`;
-   }
+    return `${hour}:${minute} ${amOrPm}`;
+  }
   return (
     <>
       <Modal />
@@ -222,27 +232,20 @@ export default function Appointment({recent}) {
             <tbody className="text-[12px]">
               {/* row 1 */}
 
-              {
-recent.map((recentAppointment, i)=>{
-const time  = dataFormat(recentAppointment.time)
-return (
-  <tr className="border-0 hover:bg-[#EFF6FF]" key={i}>
-    <td>
-      <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[12px]"></li>
-    </td>
-    <td>{recentAppointment.date}</td>
-    <td>{time}</td>
-    <td>{recentAppointment.specialist}</td> 
-    <td>{recentAppointment.purpose}</td>
-  </tr>
-);
-
-})
-
-              }
-          
-
-           
+              {recent.map((recentAppointment, i) => {
+                const time = dataFormat(recentAppointment.time);
+                return (
+                  <tr className="border-0 hover:bg-[#EFF6FF]" key={i}>
+                    <td>
+                      <li className="marker:text-gray list-disc pl-5  text-slate-400 text-[12px]"></li>
+                    </td>
+                    <td>{recentAppointment.date}</td>
+                    <td>{time}</td>
+                    <td>{recentAppointment.specialist}</td>
+                    <td>{recentAppointment.purpose}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <div className="flex justify-end p-4 items-center gap-2 ">

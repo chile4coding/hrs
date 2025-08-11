@@ -34,9 +34,15 @@ export function Modal() {
     date: "",
   });
 
+  const handleCloseModal = () => {
+    const modal = document.getElementById("my_modal_2");
+    if (modal) {
+      modal.close(); // properly close it
+    }
+  };
   const router = useRouter();
   const { hospitals } = useSelector((state) => state.hospitals);
-
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     async function hospitals() {
@@ -89,7 +95,10 @@ export function Modal() {
       setLoading(false);
 
       toast.success(data.message);
-      router.push("/home");
+      const appointment = await getAppointments(token?.token);
+      dispatch(getappointments(appointment?.userAppointment));
+
+      // router.push("/home");
       return;
     }
     setLoading(false);
@@ -99,14 +108,14 @@ export function Modal() {
 
   return (
     <>
-      <dialog id="my_modal_2" className="modal modal-right">
+      <dialog id="my_modal_2" className="modal modal-right" open={open}>
         <form
           onSubmit={handleSubmit}
           method="dialog"
           className=" modal-box bg-white   max-w-lg  sm:text-xs text-[#0F0F0F]">
           <div className=" flex justify-between items-center bg-[#3188FF] mt-0 pt-0   text-[24px]  font-semibold text-[#fff] px-[24px] h-[64px]">
             <h2 className=" ">New Appointment</h2>
-            <button type="button">
+            <button onClick={handleCloseModal}>
               <LiaTimesSolid />
             </button>
           </div>
@@ -123,7 +132,9 @@ export function Modal() {
                 Pick a hospital
               </option>
               {hospitals.map((hos) => (
-                <option value={hos.name}  key={hos._id}>{hos.name}</option>
+                <option value={hos.name} key={hos._id}>
+                  {hos.name}
+                </option>
               ))}
             </select>
             <h2 className=" self-center text-[18px]  font-medium  mb-5 text-[#0F0F0F]">
@@ -138,7 +149,9 @@ export function Modal() {
               </option>
               {specialist &&
                 specialist.map((spec) => (
-                  <option value={spec.specialist} key={spec._id}>{spec.specialist}</option>
+                  <option value={spec.specialist} key={spec._id}>
+                    {spec.specialist}
+                  </option>
                 ))}
             </select>
 
@@ -198,7 +211,6 @@ export function Modal() {
 }
 
 function Noappointment({ handleShowModal }) {
-  
   return (
     <div className="  px-6 flex justify-center items-center w-full  h-[67vh] bg-[white] rounded-lg">
       <div className=" flex   flex-col  items-center">
@@ -225,31 +237,26 @@ function Noappointment({ handleShowModal }) {
 
 export default function Appointment() {
   const dispatch = useDispatch();
-  const [tables, setTables] = useState([])
-  const [page, setPage] = useState(0)
+  const [tables, setTables] = useState([]);
+  const [page, setPage] = useState(0);
   const { appointments } = useSelector((state) => state.hospitals);
-
-
 
   useEffect(() => {
     const get = async () => {
       const sessionData = await session();
 
-      if (appointments.length>0) {
-       
+      if (appointments.length > 0) {
         const pages = paginationTable(appointments);
-      setTables(pages)
+        setTables(pages);
       }
     };
     get();
-  }, []);
+  }, [appointments]);
   const handleShowModal = () => {
     window.my_modal_2.showModal();
   };
 
-  function searchTable(value){
- 
-   
+  function searchTable(value) {
     const search = appointments.find(
       (item) =>
         item.purpose.toLowerCase().includes(value) ||
@@ -259,29 +266,25 @@ export default function Appointment() {
         item.date.toLowerCase().includes(value) ||
         item.status.toLowerCase().includes(value)
     );
- const pages = paginationTable(search);
- setTables(pages);
+    const pages = paginationTable(search);
+    setTables(pages);
   }
 
-    function nextPage() {
-      if (page < tables.length - 1) {
-        setPage((prevpage) => prevpage + 1);
-      }
+  function nextPage() {
+    if (page < tables.length - 1) {
+      setPage((prevpage) => prevpage + 1);
     }
+  }
 
-    function prevPage() {
-      if (page > 0) {
-        setPage((prevpage) => prevpage - 1);
-      }
+  function prevPage() {
+    if (page > 0) {
+      setPage((prevpage) => prevpage - 1);
     }
+  }
 
-function handlePageNumber(num){
-
-  setPage(num)
-  
-}
-  
-
+  function handlePageNumber(num) {
+    setPage(num);
+  }
 
   return (
     <Layout className=" grid justify-center items-center  ">

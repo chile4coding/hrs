@@ -34,19 +34,17 @@ import {
 function Header({ fullname, username, avatar }) {
   const [searchicon, setSearchIcon] = useState(false);
   const [searchVal, setSerchVal] = useState({
-    searchInput:""
-  })
+    searchInput: "",
+  });
 
-  const {  searchObjVal } = useSelector((state) => state.hospitals);
-  
+  const { searchObjVal } = useSelector((state) => state.hospitals);
 
-  const router  = useRouter()
-  const dispatch  = useDispatch()
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   function handleIcon(e) {
+    const { name, value } = e.target;
 
-    const {name, value}  =  e.target
-    
     setSerchVal({ ...searchVal, [name]: value });
     if (router.pathname === "/hospitals") {
       dispatch(searchHospital(searchVal.searchInput.toLowerCase()));
@@ -60,15 +58,14 @@ function Header({ fullname, username, avatar }) {
     }
   }
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
 
-    if(router.pathname ==="/hospitals"){
-dispatch(searchHospital(searchVal.searchInput.toLowerCase()));
-    }else if(router.pathname === "/facilities"){
+    if (router.pathname === "/hospitals") {
+      dispatch(searchHospital(searchVal.searchInput.toLowerCase()));
+    } else if (router.pathname === "/facilities") {
       dispatch(searchHospialFacility(searchVal.searchInput.toLowerCase()));
     }
-   
   }
 
   return (
@@ -136,9 +133,7 @@ dispatch(searchHospital(searchVal.searchInput.toLowerCase()));
       {/* <div className="navbar-center"></div> */}
       <div className="navbar-end ">
         <div className="flex items-center text-lg gap-4 font-Mukta ">
-         
-{
-  /*!SECTION
+          {/*!SECTION
   later features to be added notification and message
    <div className=" flex items-center">
             <div className="indicator mx-2 cursor-pointer">
@@ -170,10 +165,8 @@ dispatch(searchHospital(searchVal.searchInput.toLowerCase()));
           </div>
 
 
-  */
-}
+  */}
 
-         
           <div className=" rounded-full  bg-[#E8F1FF] w-10 h-10 flex justify-center items-center  ">
             {avatar ? (
               <ImageComponent imageUrl={avatar} rounded="rounded-full" />
@@ -214,9 +207,7 @@ export default function Layout({ children }) {
     rec: recomm,
   } = useSelector((state) => state.hospitals);
 
-
-
-  const {user } =  users
+  const { user } = users;
   const router = useRouter();
   function handleLogout() {
     Cookies.remove("token");
@@ -228,14 +219,9 @@ export default function Layout({ children }) {
     const get = async () => {
       const sessionData = await session();
       const data = await getUser(sessionData.token);
-    
-   
     };
     get();
   }, []);
-
-
-
 
   return (
     <div className="  w-full  max-h-[100vh]  h-full">
@@ -272,9 +258,9 @@ export default function Layout({ children }) {
                       view all
                     </Link>
                   </div>
-                  {recomm.length > 0 &&
-                    recomm.map((hospital) => (
-                      <Recommended key={hospital._id} hospital={hospital} />
+                  {recomm?.length > 0 &&
+                    recomm?.map((hospital) => (
+                      <Recommended key={hospital?._id} hospital={hospital} />
                     ))}
                 </div>
 

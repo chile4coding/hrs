@@ -37,7 +37,7 @@ export default function UserProfile() {
   });
 
   const router = useRouter();
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { user: currentUser } = useSelector((state) => state.hospitals);
 
   useEffect(() => {
@@ -104,10 +104,12 @@ const dispatch = useDispatch();
         const upload = await uploadProfilePics(userToken, result.url);
         const data = await upload.json();
         if (upload.status === 200) {
-           const data = await getUser(sessionData?.token);
+          const data = await getUser(sessionData?.token);
           setUserDetails({ ...userDetails, loading: false });
-           dispatch(storeUser(data));
-          toast.success(<div className=" normal-case">Profile picture updated</div>);
+          dispatch(storeUser(data));
+          toast.success(
+            <div className=" normal-case">Profile picture updated</div>
+          );
         } else {
           toast.error("Error uploading your profile picture, try again!");
         }
@@ -117,15 +119,9 @@ const dispatch = useDispatch();
     setUserDetails({ ...userDetails, loading: false });
   }
   async function handlePersonalDetaislUpadete() {
-        const sessionData = await session();
+    const sessionData = await session();
 
-    const checkUser = Boolean(
-      userDetails.gender &&
-    
-        userDetails.status
-    );
-
-   
+    const checkUser = Boolean(userDetails.gender && userDetails.status);
 
     if (!checkUser) {
       toast.error("Please fill all filed correctly");
@@ -155,7 +151,7 @@ const dispatch = useDispatch();
   }
 
   async function handleContactDetailsUpdate() {
-            const sessionData = await session();
+    const sessionData = await session();
 
     const checkUser = Boolean(userDetails.phone && userDetails.email);
 
@@ -172,8 +168,8 @@ const dispatch = useDispatch();
       email: userDetails.email,
     });
     if (result.status === 200) {
-              const data = await getUser(sessionData?.token);
-            dispatch(storeUser(data));
+      const data = await getUser(sessionData?.token);
+      dispatch(storeUser(data));
       toast.success("details updated successfully");
     } else {
       toast.error("An error occurred, please try again");
@@ -181,30 +177,25 @@ const dispatch = useDispatch();
 
     setUserDetails({ ...userDetails, finalLoad: false });
   }
-  
-
 
   return (
     <div className="mt-6  sm:mb-2 card md:w-full  xl:w-full lg:w-full   sm:w-full bg-white      border-collapse border-0 hover:bg-white ">
       <div className=" p-6 sm:p-2   w-full ">
         <div className="  flex flex-col items-center gap-3 justify-center">
-       
           <div className="relative">
-            <img
-              htmlFor="user_img"
-              src={
-                userDetails.avatar
-                  ? userDetails.avatar
-                  : userDetails.gender === "male"
-                  ? "/male.png"
-                  : "/female.jpg"
-              }
-              className=" rounded-full   object-cover h-[66px] w-[66px]"
-            />
-            <label
-              className=" absolute top-12 -right-0 text-[#3188FF]  cursor-pointer"
-              htmlFor="user_img">
-              <BiSolidMessageEdit className=" text-[16px] font-bold" />
+            <label className="   cursor-pointer" htmlFor="user_img">
+              <img
+                htmlFor="user_img"
+                src={
+                  userDetails.avatar
+                    ? userDetails.avatar
+                    : userDetails.gender === "male"
+                    ? "/male.png"
+                    : "/female.jpg"
+                }
+                className=" rounded-full   object-cover h-[66px] w-[66px]"
+              />
+              {/* <BiSolidMessageEdit className=" text-[16px] font-bold" /> */}
             </label>
             <input
               type="file"
@@ -338,6 +329,9 @@ const dispatch = useDispatch();
                 value={userDetails.gender}
                 onChange={handleInputChange}
                 className="select text-[16px] bg-transparent w-full outline-0 outline-none sm:text-xs  ">
+                <option value="" disabled selected>
+                  -- select gender --
+                </option>
                 <option value="Male" selected={userDetails.gender === "Male"}>
                   Male
                 </option>
@@ -370,6 +364,9 @@ const dispatch = useDispatch();
                 onChange={handleInputChange}
                 value={userDetails.status}
                 className="select text-[16px] bg-transparent w-full outline-0 outline-none border-0   border-none sm:text-xs  ">
+                <option value="" disabled selected>
+                  -- select marital status --
+                </option>
                 <option
                   value="Single"
                   selected={userDetails.status === "Single"}>
@@ -452,7 +449,7 @@ const dispatch = useDispatch();
                 required
                 name="phone"
                 onChange={handleInputChange}
-                value={userDetails.phone}
+                value={userDetails.phone || ""}
                 className="text-[16px] p-4 bg-transparent w-full outline-0 outline-none sm:text-xs sm:p-3   "
               />
 

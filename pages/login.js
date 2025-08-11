@@ -33,7 +33,7 @@ export default function Login() {
     loading: false,
   });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const route = useRouter();
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function Login() {
 
     const data = await response.json();
     if (response.ok) {
-      Cookies.set("token", data?.token,  { expires: 7 });
+      Cookies.set("token", data?.token, { expires: 7 });
       session(data);
       toast.success(data.mesage);
 
@@ -88,7 +88,7 @@ export default function Login() {
 
   return (
     <Layout>
-      <main className="bg-[#fff] py-8 px-8 h-full rounded-lg normal-case">
+      <main className="bg-[#fff] py-8 px-8  rounded-lg normal-case">
         <h2 className=" font-bold text-[32px] text-[#3188FF] lg:mt-24">
           Sign in to HRS
         </h2>
@@ -155,7 +155,7 @@ export default function Login() {
           </div>
         </form>
 
-        <div className=" flex  w-full gap-1 justify-center my-3">
+        <div className=" flex  w-full gap-1 justify-center my-3 item">
           <p className="text-[14px]  font-normal sm:text-[10px]    normal-case">
             Don&apos;t have an Account?
           </p>
