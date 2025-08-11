@@ -11,8 +11,8 @@ import {
   getUserApointmentDashboard,
   getRecommmendations,
   getHospitals,
-   getRecommmendationsByRating,
-getRecommmendationsByLocation
+  getRecommmendationsByRating,
+  getRecommmendationsByLocation,
 } from "../services/request";
 import Appointment from "../components/appointment";
 import { ImAidKit } from "react-icons/im";
@@ -43,12 +43,11 @@ export function PageLoad() {
 
 export default function Home() {
   const [specialisst, setSpecialist] = useState(0);
-  const [chart, setChart] = useState([])
+  const [chart, setChart] = useState([]);
   const {
     user: users,
     hospitals,
     appointments,
-    // recentAppoints,
   } = useSelector((state) => state.hospitals);
   const { user } = users;
 
@@ -59,31 +58,32 @@ export default function Home() {
       const sessionData = await session();
 
       const data = await getUser(sessionData?.token);
-      
-     const userchartDashBoard = await getUserApointmentDashboard(sessionData?.token)
-     setChart(userchartDashBoard) 
-      
 
-     dispatch(storeUser(data));
+      const userchartDashBoard = await getUserApointmentDashboard(
+        sessionData?.token
+      );
+      setChart(userchartDashBoard);
+
+      dispatch(storeUser(data));
       addedUserLocation(sessionData?.token);
       const appointment = await getAppointments(sessionData?.token);
-       dispatch(getappointments(appointment.userAppointment));
-        const recommendation = await getRecommmendations(sessionData.token);
-        dispatch(getRecommendation(recommendation.locationRecommendation));
-        const rec = recommendation.locationRecommendation?.slice(0, 4);
+      dispatch(getappointments(appointment.userAppointment));
+      const recommendation = await getRecommmendations(sessionData.token);
+      dispatch(getRecommendation(recommendation.locationRecommendation));
+      const rec = recommendation.locationRecommendation?.slice(0, 4);
 
-       dispatch( setRecomm(rec));
-  const hospital = await getHospitals(sessionData?.token);
-  const facility = hospital.hospitals.flatMap((obj) => obj.facilities);
+      dispatch(setRecomm(rec));
+      const hospital = await getHospitals(sessionData?.token);
+      const facility = hospital.hospitals.flatMap((obj) => obj.facilities);
 
-const ratinRec = await getRecommmendationsByRating(sessionData?.token);
-const locRec = await getRecommmendationsByLocation(sessionData?.token);
+      const ratinRec = await getRecommmendationsByRating(sessionData?.token);
+      const locRec = await getRecommmendationsByLocation(sessionData?.token);
 
-dispatch(getRecommendationByRating(ratinRec.ratingRecommendation));
-dispatch(getRecommendationByLoc(locRec.locationRecommendation));
+      dispatch(getRecommendationByRating(ratinRec.ratingRecommendation));
+      dispatch(getRecommendationByLoc(locRec.locationRecommendation));
 
-dispatch(setFacilities(facility));
-dispatch(getHospital(hospital?.hospitals));
+      dispatch(setFacilities(facility));
+      dispatch(getHospital(hospital?.hospitals));
       dispatch(getappointments(appointment?.userAppointment));
       await autoUpdateAppointment(sessionData?.token);
       const spec = hospitals
@@ -98,9 +98,6 @@ dispatch(getHospital(hospital?.hospitals));
     return <PageLoad />;
   }
 
- 
-
- 
   return (
     <Layout>
       <div className="mt-20 grid xl:grid-cols-3  lg:grid-cols-3  md:grid-cols-2  sm:grid-cols-1 gap-4">
@@ -133,7 +130,8 @@ dispatch(getHospital(hospital?.hospitals));
       </div>
       <div className="grid  xl:grid-cols-5 lg:grid-cols-2  md:grid-cols-2  sm:grid-cols-1  w-full   justify-center   gap-4  mt-10   mr-5 ">
         {chart.length === 0 && (
-          <div className={`  card bg-[#fff] xl:col-span-3 pt-8 h-full w-full  text-center`}>
+          <div
+            className={`  card bg-[#fff] xl:col-span-3 pt-8 h-full w-full  text-center`}>
             {" "}
             <p>
               <Loginspinner />
