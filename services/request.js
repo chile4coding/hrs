@@ -1,4 +1,4 @@
-const baseUrl = "https://api-hrsm.onrender.com/v1";
+const baseUrl = "https://api-hrs.onrender.com/v1";
 // const baseUrl = "http://localhost:5467/v1/";
 
 export async function loginRequest(userData) {
