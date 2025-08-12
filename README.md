@@ -1,38 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# HRS - Hospital Recommender System
 
-## Getting Started
+A Next.js application that allows patients to discover and interact with hospitals based on location, distance, and ratings. It supports authentication, hospital management (including images, specialists, facilities, services), appointment booking, and personalized recommendations.
 
-First, run the development server:
+## 🚀 Getting Started
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Make sure you have the following installed on your local machine:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- **Node.js** (version 16.x or higher)
+- **npm** package manager
+- **Git** for version control
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Installation
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. **Clone the repository**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```bash
+   git clone https://github.com/chile4coding/hrs.git
+   cd hrs
+   ```
 
-## Learn More
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Available Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Development**: Start the development server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  ```bash
+  npm run dev
+  ```
 
-## Deploy on Vercel
+  Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Build**: Build the application for production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  ```bash
+  npm run build
+  ```
+
+- **Start**: Start the production build
+  ```bash
+  npm start
+  ```
+
+## 🏥 Features
+
+- **Hospital Discovery** - Find hospitals based on location, distance, and ratings
+- **Authentication** - User login and account management
+- **Hospital Management** - Complete hospital profiles with images, specialists, facilities, and services
+- **Appointment Booking** - Schedule appointments with healthcare providers
+- **Personalized Recommendations** - Get hospital suggestions tailored to your needs
+- **Location-based Search** - Find nearby hospitals using geolocation
+- **Rating System** - View and submit hospital ratings and reviews
+
+---
+
+**Building better healthcare accessibility! 🏥💚**
